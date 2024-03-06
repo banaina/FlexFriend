@@ -1,0 +1,42 @@
+TODO: Basic:
+    Routine creation + Display routines:
+
+    Routine creation
+
+      Users are able to create a routine. This includes:
+      picking a repetition or timed plan, assigning it to a category, adding specific exercises,
+      and entering the number of repetitions or seconds for each activity.
+
+    Display routines:
+
+      The groups on the homepage (cardio, strength, flexibility) are clickable and they will each
+      lead the user to the routines corresponding with the category selected.
+
+      The routines names are displayed in a list format.
+
+      When a routine is selected it displays the exercises included within that plan, along with
+      the activities and their intervals which are clearly displayed.
+
+TODO: Standard:
+    Routine execution + Progress pictures:
+
+    Routine execution
+
+      When the user is on the screen for a specific routine, they can tap the back of the phone
+      twice to begin their workout. If an accelerometer does not exist on their device, they can
+      press the start button to begin instead.
+
+      If the exercises are timed, this triggers a timer which automatically cycles between the
+      activities. When the timer runs out the workout is complete.
+
+      If the exercises are repetition based, the user can tap back and forth between each activity.
+
+      The workout is complete when the user reaches the last exercise in that routine.
+
+    Progress pictures:
+      The progress tab features a button leading progress photos and another which opens the camera.
+
+      If there are no images and the photos button is clicked, it leads to the camera.
+
+      The camera captures a picture and saves it to the grid layout within the
+      progress pictures screen.
