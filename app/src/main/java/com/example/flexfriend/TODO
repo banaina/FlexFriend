@@ -40,3 +40,41 @@ TODO: Standard:
 
       The camera captures a picture and saves it to the grid layout within the
       progress pictures screen.
+
+
+
+Timeline:
+Feb 16 - Feb 23:
+Create rough wireframes for app screens/layout on paper or Figma
+Create layout and intents from one activity to another on Android Studio
+Have basic setup of each screen and navigation between tabs
+Be able to demonstrate the app flow between screens and buttons
+Have onboarding process complete, which will store user info into SharedPreferences
+
+Feb 24 - March 1:
+Have routine creation process integrated, be able to choose click each button and have the user’s various exercise choices stored in SQLite and SharedPreferences
+Be able to view created routines on the homepage/routines page
+Ability to use accelerometer to begin a workout routine
+
+March 2 - 8:
+Generally be able to use repetition based routines
+Option to cycle through exercises and return to homepage when the routine is complete
+Option to open up camera and use within progress & goals tab
+
+March 9 - 15:
+Be able to use camera to take and store images
+Display captured images on the progress photos screen
+Research and explore graphs within Android Studio
+
+March 16 - 22:
+Generally be able to use the timer based routines
+Timer should work according to data in SQLite database (intervals for each exercise)
+Refine camera usage and photo storage within app
+
+March 23 - 29:
+Be able to take progress data from the user and display it using a graph
+Integrate Biometric lock and password protected progress photos screen
+
+March 30 - April 2:
+Refine all features, bug testing, and ensure the app works without error.
+All hardware, sensors, data storage, should be working
