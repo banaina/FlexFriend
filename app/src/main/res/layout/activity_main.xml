@@ -53,26 +53,31 @@
         android:id="@+id/routinesBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="heart"
-        tools:layout_editor_absoluteX="44dp"
-        tools:layout_editor_absoluteY="638dp" />
+        android:layout_marginStart="36dp"
+        android:layout_marginBottom="64dp"
+        android:text="routines"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/newRoutineBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="64dp"
         android:text="new routine"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="639dp" />
+        app:layout_constraintHorizontal_bias="0.531"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/progressBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="32dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="64dp"
         android:text="progress"
-        app:layout_constraintEnd_toEndOf="parent"
-        tools:layout_editor_absoluteY="639dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
