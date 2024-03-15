@@ -58,8 +58,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (v.getId() == R.id.flexibilityBtn) {
             // access all the created routines of the flexibility category from the database
             // then send all the info into a recycler view
-            Intent intent = new Intent(this, RoutinesActivity.class);
             Toast.makeText(this, "flexibility category clicked",Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(this, RoutinesActivity.class);
             startActivity(intent);
         }
 
@@ -67,12 +67,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             // access all the created routines of the cardio category from the database
             // then send all the info into a recycler view
             Toast.makeText(this, "cardio category clicked",Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(this, RoutinesActivity.class);
+            startActivity(intent);
         }
 
         if (v.getId() == R.id.strengthBtn) {
             // access all the created routines of the strength category from the database
             // then send all the info into a recycler view
             Toast.makeText(this, "strength category clicked",Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(this, RoutinesActivity.class);
+            startActivity(intent);
         }
 
         if (v.getId() == R.id.routinesBtn) {
