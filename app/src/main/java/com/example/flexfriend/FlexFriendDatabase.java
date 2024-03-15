@@ -33,6 +33,9 @@ public class FlexFriendDatabase {
     }
 
     public Cursor getData(){
+
+        // this does a query search of all the column names
+
         SQLiteDatabase db = helper.getWritableDatabase();
 
         String[] columns = {Constants.UID, Constants.CATEGORY, Constants.ROUTINE_NAME,
