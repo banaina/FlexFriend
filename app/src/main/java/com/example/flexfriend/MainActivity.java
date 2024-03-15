@@ -57,7 +57,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (v.getId() == R.id.flexibilityBtn) {
             // access all the created routines of the flexibility category from the database
             // then send all the info into a recycler view
+            Intent intent = new Intent(this, RoutinesActivity.class);
             Toast.makeText(this, "flexibility category clicked",Toast.LENGTH_SHORT).show();
+            startActivity(intent);
         }
 
         if (v.getId() == R.id.cardioBtn) {

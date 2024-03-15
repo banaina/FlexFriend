@@ -4,6 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
+// this class shows all the user created routines through a recycler view
+// get data from either the flexibility, cardio, or strength button intent
+
 public class RoutinesActivity extends AppCompatActivity {
 
     @Override
