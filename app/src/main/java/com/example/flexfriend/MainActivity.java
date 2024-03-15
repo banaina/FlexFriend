@@ -87,6 +87,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (v.getId() == R.id.newRoutineBtn) {
             //go to the create new routine activity page
             Toast.makeText(this, "create new routine clicked",Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(this, NewRoutineActivity.class);
+            startActivity(intent);
         }
 
         if (v.getId() == R.id.progressBtn) {
