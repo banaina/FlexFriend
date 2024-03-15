@@ -13,6 +13,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Button camera;
     private Button flexibilityBtn, cardioBtn, strengthBtn; // routine category buttons
     private Button routinesBtn, newRoutineBtn, progressBtn; // bottom page buttons
+    FlexFriendDatabase db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
