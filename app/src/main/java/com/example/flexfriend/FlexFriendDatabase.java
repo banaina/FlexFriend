@@ -34,7 +34,8 @@ public class FlexFriendDatabase {
 
     public Cursor getData(){
 
-        // this does a query search of all the column names
+        // this does a query search of all the data in each column
+        // if smt is null it means that it will return all the data
 
         SQLiteDatabase db = helper.getWritableDatabase();
 
@@ -43,8 +44,23 @@ public class FlexFriendDatabase {
                 Constants.TIME};
         Cursor cursor = db.query(Constants.TABLE_NAME, columns, null, null, null,
                 null, null);
+
         return cursor;
 
+    }
+
+    public Cursor getRoutineData(){
+
+        // this does a query search of all the data in the column of category and routine name
+        // groups the data by category
+
+
+        SQLiteDatabase db = helper.getWritableDatabase();
+
+        String[] columns = {Constants.UID, Constants.CATEGORY, Constants.ROUTINE_NAME};
+        Cursor cursor = db.query(Constants.TABLE_NAME, columns,null, null, Constants.CATEGORY, null, null);
+
+        return cursor;
     }
 
 
