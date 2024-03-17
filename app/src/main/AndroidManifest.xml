@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
-
-<!--ensure the device has a camera, front or back-->
-    <uses-feature android:name="android.hardware.camera.any"/>
-<!--add permission to access that camera-->
-    <uses-feature android:name="android.permission.CAMERA"/>
+    <!-- ensure the device has a camera, front or back -->
+    <uses-feature android:name="android.hardware.camera.any" /> <!-- add permission to access that camera -->
+    <uses-feature android:name="android.permission.CAMERA" />
 
     <application
         android:allowBackup="true"
@@ -17,6 +15,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FlexFriend"
         tools:targetApi="31">
+        <activity
+            android:name=".progresspage.GalleryActivity"
+            android:exported="false" />
         <activity
             android:name=".RoutinesActivity"
             android:exported="false" />

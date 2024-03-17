@@ -1,6 +1,7 @@
 package com.example.flexfriend;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.camera.core.CameraSelector;
 import androidx.camera.core.ImageCapture;
@@ -17,11 +18,9 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.common.util.concurrent.ListenableFuture;
-
 import java.util.concurrent.ExecutionException;
 
 public class ProgressActivity extends AppCompatActivity implements View.OnClickListener, SensorEventListener {
@@ -30,6 +29,7 @@ public class ProgressActivity extends AppCompatActivity implements View.OnClickL
     private ImageCapture imageCapture;
     private Sensor accelerometer;
     private SensorManager mySensorManager;
+    private PicturesDatabase picsDB;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +43,7 @@ public class ProgressActivity extends AppCompatActivity implements View.OnClickL
 
         mySensorManager =  (SensorManager) getSystemService(SENSOR_SERVICE);
         accelerometer = mySensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+        picsDB = new PicturesDatabase(this);
     }
     protected void onResume() {
         super.onResume();
@@ -122,5 +123,19 @@ public class ProgressActivity extends AppCompatActivity implements View.OnClickL
     @Override
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
 
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == img_id){
+            //TODO: replace so that after the user captures and image, the app asks them to label/set a date for the photo
+            boolean insert = picsDB.insertData("placeholder name", imageCapture);
+            if (insert){
+                Toast.makeText(this, "image saved to database !", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(this, "image not saved...", Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 }
