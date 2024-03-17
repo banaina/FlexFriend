@@ -24,10 +24,10 @@ import java.util.List;
 public class NewRoutine_RecyclerViewAdapter extends RecyclerView.Adapter<MovementVH>{
 
 // IDK WHY THE VID PUT LIST OF STRING BUT DO IT ANYWAY AND CHANGE IT LATER
-    ArrayList<String> items;
+    ArrayList<String> movementInfo;
 
-    public NewRoutine_RecyclerViewAdapter(ArrayList<String> items){
-        this.items = items;
+    public NewRoutine_RecyclerViewAdapter(ArrayList<String> movementInfo){
+        this.movementInfo = movementInfo;
 
     }
     @NonNull
@@ -40,14 +40,20 @@ public class NewRoutine_RecyclerViewAdapter extends RecyclerView.Adapter<Movemen
 
     @Override
     public void onBindViewHolder(@NonNull MovementVH holder, int position) {
-        holder.movementET.setText(items.get(position));
-        holder.setsET.setText(items.get(position));
-        holder.secRepET.setText(items.get(position));
+//        holder.movementET.setText(items.get(position));
+//        holder.setsET.setText(items.get(position));
+//        holder.secRepET.setText(items.get(position));
+
+        // initialize the view with view holder
+        CheckBox timeCheckBox = holder.timeCheckBox;
+        EditText movementET = holder.movementET;
+        EditText setsET = holder.setsET;
+        EditText secRepET = holder.secRepET;
     }
 
     @Override
     public int getItemCount() {
-        return items.size();
+        return movementInfo.size();
     }
 }
 
@@ -55,7 +61,7 @@ class MovementVH extends RecyclerView.ViewHolder{
 
     CheckBox timeCheckBox;
     EditText movementET, setsET, secRepET;
-    Button deleteBtn;
+
     private NewRoutine_RecyclerViewAdapter adapter;
 
     public MovementVH(@NonNull View itemView) {
@@ -66,7 +72,7 @@ class MovementVH extends RecyclerView.ViewHolder{
         secRepET = itemView.findViewById(R.id.secRepET);
 
         itemView.findViewById(R.id.deleteBtn).setOnClickListener(view -> {
-            adapter.items.remove(getAdapterPosition());
+            adapter.movementInfo.remove(getAdapterPosition());
             adapter.notifyItemRemoved(getAdapterPosition());
         });
     }
