@@ -1,14 +1,163 @@
 package com.example.flexfriend;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.camera.core.CameraSelector;
+import androidx.camera.core.ImageCapture;
+import androidx.camera.core.Preview;
+import androidx.camera.lifecycle.ProcessCameraProvider;
+import androidx.core.content.ContextCompat;
 
+import android.content.Intent;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.view.View;
+import android.widget.Button;
+import android.widget.Toast;
 
-public class ProgressActivity extends AppCompatActivity {
+import com.google.common.util.concurrent.ListenableFuture;
+import java.util.concurrent.ExecutionException;
+
+public class ProgressActivity extends AppCompatActivity implements View.OnClickListener, SensorEventListener {
+    private static final int img_id = 1;
+    private Button cameraButton, galleryButton, routinesBtn, newRoutineBtn, progressBtn; // bottom page buttons;
+    private ImageCapture imageCapture;
+    private Sensor accelerometer;
+    private SensorManager mySensorManager;
+    private PicturesDatabase picsDB;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_camera);
+        setContentView(R.layout.activity_progress);
+
+        cameraButton = findViewById(R.id.cameraButton);
+        cameraButton.setOnClickListener(this);
+        galleryButton = findViewById(R.id.galleryButton);
+        galleryButton.setOnClickListener(this);
+
+        //bottom of the page buttons
+        routinesBtn = (Button) findViewById(R.id.routinesBtn);
+        newRoutineBtn = (Button) findViewById(R.id.newRoutineBtn);
+        progressBtn = (Button) findViewById(R.id.progressBtn);
+        routinesBtn.setOnClickListener(this);
+        newRoutineBtn.setOnClickListener(this);
+        progressBtn.setOnClickListener(this);
+
+        mySensorManager =  (SensorManager) getSystemService(SENSOR_SERVICE);
+        accelerometer = mySensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+        picsDB = new PicturesDatabase(this);
+    }
+    protected void onResume() {
+        super.onResume();
+        //register resources late, register sensors late
+        mySensorManager.registerListener(this, accelerometer, SensorManager.SENSOR_DELAY_NORMAL);
+    }
+    @Override
+    protected void onPause() {
+        super.onPause();
+        //release resources early, unregister sensors early
+        mySensorManager.unregisterListener(this);
+    }
+
+    //get an instance of ProcessCameraProvider
+    private void startCamera() {
+        final ListenableFuture<ProcessCameraProvider> cameraProviderFuture
+                = ProcessCameraProvider.getInstance(this);
+        cameraProviderFuture.addListener(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    ProcessCameraProvider cameraProvider = cameraProviderFuture.get();
+                    bindPreview(cameraProvider);
+
+                } catch (ExecutionException | InterruptedException e) {
+                    // This should never be reached.
+                }
+            }
+        }, ContextCompat.getMainExecutor(this));
+    }
+
+    //selecting a camera and binding to the lifecycle
+    void bindPreview(@NonNull ProcessCameraProvider cameraProvider) {
+
+        cameraProvider.unbindAll();
+
+        Preview preview = new Preview.Builder()
+                .build();
+
+        CameraSelector cameraSelector = new CameraSelector.Builder()
+                .requireLensFacing(CameraSelector.LENS_FACING_BACK)
+                .build();
+
+
+        imageCapture = new ImageCapture.Builder()
+                .setCaptureMode(ImageCapture.CAPTURE_MODE_MINIMIZE_LATENCY)
+                .build();
+//        preview.setSurfaceProvider(previewView.getSurfaceProvider());
+        cameraProvider.bindToLifecycle(this, cameraSelector, preview, imageCapture);
+    }
+
+    @Override
+    public void onClick(View v) {
+        //button which opens the camera, this is an option if the device does not have an accelerometer
+        //which means the shaking motion does not open the camera
+        if (v.getId() == R.id.cameraButton){
+            Intent camera_intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            startActivityForResult(camera_intent, img_id);
+        }
+        if (v.getId() == R.id.galleryButton){
+            //send to gallery
+        }
+        if (v.getId() == R.id.routinesBtn) {
+            // go to the routines page that lets the user choose which category of routines
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+        }
+        if (v.getId() == R.id.newRoutineBtn) {
+            //go to the create new routine activity page
+            Intent intent = new Intent(this, NewRoutineActivity.class);
+            startActivity(intent);
+        }
+        if (v.getId() == R.id.progressBtn) {
+            //go to the progress page activity where user can take and store progress photos
+            Toast.makeText(this, "currently on the progress page",Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    @Override
+    public void onSensorChanged(SensorEvent event) {
+        //when the accelerometer value surpasses the threshold, it signals that there is movement
+        //shaking movement from the phone causes the camera to open
+        float[] values = event.values;
+        if (values[0] > 15 || values[1] > 15 || values[2] > 15) {
+            Toast.makeText(this, "Phone shaken, sending to camera activity", Toast.LENGTH_SHORT).show();
+            Intent camera_intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            startActivityForResult(camera_intent, img_id);
+        }
+    }
+
+    @Override
+    public void onAccuracyChanged(Sensor sensor, int accuracy) {
+
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == img_id){
+            //TODO: replace so that after the user captures and image, the app asks them to label/set a date for the photo
+            boolean insert = picsDB.insertData("placeholder name", imageCapture);
+            if (insert){
+                Toast.makeText(this, "image saved to database !", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(this, "image not saved...", Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 }

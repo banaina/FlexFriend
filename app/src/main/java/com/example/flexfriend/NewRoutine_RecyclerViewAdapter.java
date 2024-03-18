@@ -1,46 +1,24 @@
 package com.example.flexfriend;
 
-import android.content.Context;
-import android.content.Intent;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
-import java.util.List;
 
 // this class will add new cardviews to the recycler of NewRoutineActivity
 // the cardview model -> create_routine_model.xml
 
 public class NewRoutine_RecyclerViewAdapter extends RecyclerView.Adapter<MovementVH>{
 
-    Context context;
-    ArrayList<NewRoutineDataModel> movementInfo;
-    //ArrayList<String> movementInfo;
+    ArrayList<String> movementInfo;
 
-    ArrayList<String> movementNameArray = new ArrayList<>();
-    ArrayList<Integer> setsArray = new ArrayList<>();
-    ArrayList<Integer> repsArray = new ArrayList<>();
-    ArrayList<Boolean> timeArray = new ArrayList<>();
-
-    boolean isOnTextChangedMovement = false;
-    boolean isOnTextChangedSets = false;
-    boolean isOnTextChangedReps = false;
-
-
-    public NewRoutine_RecyclerViewAdapter(ArrayList<NewRoutineDataModel> movementInfo){
+    public NewRoutine_RecyclerViewAdapter(ArrayList<String> movementInfo){
         this.movementInfo = movementInfo;
 
     }
@@ -63,88 +41,6 @@ public class NewRoutine_RecyclerViewAdapter extends RecyclerView.Adapter<Movemen
         EditText movementET = holder.movementET;
         EditText setsET = holder.setsET;
         EditText secRepET = holder.secRepET;
-
-        int id = movementInfo.get(position).getCardViewId();
-
-        movementET.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                isOnTextChangedMovement = true;
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                if (isOnTextChangedMovement) {
-                    isOnTextChangedMovement = false;
-
-                    try {
-
-                        for (int i = 0; i < id; i++) {
-                            if(i!=id){
-                                movementNameArray.add("");
-                            }
-                            else{
-                                movementNameArray.add("");
-                                movementNameArray.set(id,s.toString());
-
-                            }
-                        }
-
-                    }catch (NumberFormatException e){
-
-                    }
-                }
-                Log.d("movementNameArray: ", movementNameArray.toString());
-
-            }
-        });
-
-        setsET.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                isOnTextChangedSets = true;
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                if (isOnTextChangedSets) {
-                    isOnTextChangedSets = false;
-                }
-
-            }
-        });
-
-        secRepET.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                isOnTextChangedReps = true;
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                if (isOnTextChangedReps) {
-                    isOnTextChangedReps = false;
-                }
-            }
-        });
     }
 
     @Override
@@ -153,7 +49,6 @@ public class NewRoutine_RecyclerViewAdapter extends RecyclerView.Adapter<Movemen
     }
 }
 
-//the recyclerview viewholder
 class MovementVH extends RecyclerView.ViewHolder{
 
     CheckBox timeCheckBox;
@@ -172,6 +67,16 @@ class MovementVH extends RecyclerView.ViewHolder{
             adapter.movementInfo.remove(getAdapterPosition());
             adapter.notifyItemRemoved(getAdapterPosition());
         });
+    }
+
+    public String getCardInfo(){
+        String timedBox = String.valueOf(timeCheckBox.isChecked());
+        String movement = movementET.getText().toString();
+        String sets = setsET.getText().toString();
+        String reps = secRepET.getText().toString();
+
+        String cardInfo = timedBox+ " " + movement + " " + sets+ " " + reps;
+        return cardInfo;
     }
 
     public MovementVH linkAdapter(NewRoutine_RecyclerViewAdapter adapter){

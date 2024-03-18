@@ -10,7 +10,6 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private Button camera;
     private Button flexibilityBtn, cardioBtn, strengthBtn; // routine category buttons
     private Button routinesBtn, newRoutineBtn, progressBtn; // bottom page buttons
     FlexFriendDatabase db;
@@ -19,8 +18,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-//        camera = findViewById(R.id.camActivity); IDK WERE TO PUT THE CAMERA BUTTON OR IF WE'RE USING IT
-//        camera.setOnClickListener(this);
 
         // routine category selection ids
         flexibilityBtn = (Button) findViewById(R.id.flexibilityBtn);
@@ -44,21 +41,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
-//        if (v.getId() == R.id.camActivity){
-//            Intent intent = new Intent(this, ProgressActivity.class);
-//            Toast.makeText(this, "heading to progress viewing activity",Toast.LENGTH_SHORT).show();
-//            startActivity(intent);
-//        }
-//        if (v.getId() == R.id.introActivity){
-//            Intent intent = new Intent(this, RoutinesActivity.class);
-//            Toast.makeText(this, "heading to routine creation activity",Toast.LENGTH_SHORT).show();
-//            startActivity(intent);
-//        }
-
         if (v.getId() == R.id.flexibilityBtn) {
             // access all the created routines of the flexibility category from the database
             // then send all the info into a recycler view
-            Toast.makeText(this, "flexibility category clicked",Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(this, RoutinesActivity.class);
             startActivity(intent);
         }
@@ -66,7 +51,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (v.getId() == R.id.cardioBtn) {
             // access all the created routines of the cardio category from the database
             // then send all the info into a recycler view
-            Toast.makeText(this, "cardio category clicked",Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(this, RoutinesActivity.class);
             startActivity(intent);
         }
@@ -74,26 +58,25 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (v.getId() == R.id.strengthBtn) {
             // access all the created routines of the strength category from the database
             // then send all the info into a recycler view
-            Toast.makeText(this, "strength category clicked",Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(this, RoutinesActivity.class);
             startActivity(intent);
         }
 
         if (v.getId() == R.id.routinesBtn) {
             // go to the routines page that lets the user choose which category of routines
-            Toast.makeText(this, "routines category clicked",Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "currently on the routines page",Toast.LENGTH_SHORT).show();
         }
 
         if (v.getId() == R.id.newRoutineBtn) {
             //go to the create new routine activity page
-            Toast.makeText(this, "create new routine clicked",Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(this, NewRoutineActivity.class);
             startActivity(intent);
         }
 
         if (v.getId() == R.id.progressBtn) {
-            //go to the progress page activity
-            Toast.makeText(this, "progress Button clicked",Toast.LENGTH_SHORT).show();
+            //go to the progress page activity where user can take and store progress photos
+            Intent intent = new Intent(this, ProgressActivity.class);
+            startActivity(intent);
         }
     }
 }

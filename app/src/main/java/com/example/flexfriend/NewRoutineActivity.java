@@ -7,55 +7,83 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
+import java.util.Objects;
 
 // this activity lets the user create a new routine
 // the add more button will add another cardview to the arraylist of the recyclerview
 // create a list that starts off with at least 2 cardviews
-public class NewRoutineActivity extends AppCompatActivity{
-
-    private ArrayList<NewRoutineDataModel> data;
-    NewRoutineDataModel newRoutineDataModel;
-    //String[] movementData;
-    String[] movementData = {"movement","sets","reps", "isTimed"}; // add the movement editText info that was in the card
-    int counter = 0;
+public class NewRoutineActivity extends AppCompatActivity implements View.OnClickListener {
+    private RecyclerView recyclerView;
+    NewRoutine_RecyclerViewAdapter adapter;
+    private Button create, addMoreBtn;
+    private ArrayList<String> movementCards;
+//    private ArrayList<NewRoutine_RecyclerViewAdapter>;
+    private String[] movementData = {"","","",""}; // add the movement editText info that was in the card
+    private String s;
+    private int counter = 0;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_routine);
-
-        // generate the ArrayList and store in NewRoutineDataModel
-        for (int i = 0; i < movementData.length; i++) {
-            newRoutineDataModel = new NewRoutineDataModel(i,null, 0, 0, false);
-            data.add(newRoutineDataModel);
-
-        }
+        create = findViewById(R.id.createRoutineBtn);
+        create.setOnClickListener(this);
+        addMoreBtn = findViewById(R.id.addMoreBtn);
+        addMoreBtn.setOnClickListener(this);
 
         // this sets up the recycler view that was created in the NewRoutine_RecyclerViewAdapter.java
         // which allows you to add and remove cardviews of the created movements
-        ArrayList<NewRoutineDataModel> movementCards = new ArrayList<>();
-        movementCards.add(newRoutineDataModel); // add the movement editText info that was in the card
+        movementCards= new ArrayList<>();
+        movementCards.add(Arrays.toString(movementData)); // add the movement editText info that was in the card
 
-        RecyclerView recyclerView = findViewById(R.id.createRoutineRV);
+        recyclerView = findViewById(R.id.createRoutineRV);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        NewRoutine_RecyclerViewAdapter adapter = new NewRoutine_RecyclerViewAdapter(movementCards);
+        adapter = new NewRoutine_RecyclerViewAdapter(movementCards);
         recyclerView.setAdapter(adapter);
-        
-        data = new ArrayList<>();
 
-
-
-        findViewById(R.id.addMoreBtn).setOnClickListener(view ->{
-            movementCards.add(newRoutineDataModel); // add the movement editText info that was in the card
-            counter++;
-           // movementCard.add(Arrays.toString(movementData)); // add the movement editText info that was in the card
-            Log.d("movementData", "movementDataArray: " + Arrays.toString(movementData)
-            + " movementCardArray size: " + movementCards.size());
-            adapter.notifyItemInserted(movementCards.size()-1);
-        });
     }
+
+
+    @Override
+    public void onClick(View v) {
+
+        if (v.getId() == R.id.createRoutineBtn) {
+            for (int i = 0; i < recyclerView.getAdapter().getItemCount(); i++) {
+                MovementVH vh = (MovementVH) recyclerView.findViewHolderForLayoutPosition(i);
+                if (vh != null) {
+                   movementCards.set(i, vh.getCardInfo());
+                }
+            }
+
+            //below code is just for debugging, can delete later
+//            String s = String.valueOf(movementCards.size());
+//            //must add at least 3 cards before pressing create or else itll crash before
+//            //displaying the toast
+//            String d = movementCards.get(0);
+//            String f = movementCards.get(1);
+//            String t = movementCards.get(2);
+//            String g = String.valueOf(recyclerView.getAdapter().getItemCount());
+//            Toast.makeText(this, s+ g + d + f + t, Toast.LENGTH_SHORT).show();
+            Log.d("movementCardInfo","movementCardsArray: " + movementCards);
+        }
+
+
+        if (v.getId() == R.id.addMoreBtn) {
+            movementCards.add(Arrays.toString(movementData));
+            counter++;
+            // movementCard.add(Arrays.toString(movementData)); // add the movement editText info that was in the card
+            Log.d("movementData", "movementDataArray: " + Arrays.toString(movementData)
+                    + " movementCardsArray: " + movementCards);
+            adapter.notifyItemInserted(movementCards.size()-1);
+
+        }
+    }
+
 }
