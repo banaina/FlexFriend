@@ -22,7 +22,7 @@ import java.util.Objects;
 public class NewRoutineActivity extends AppCompatActivity implements View.OnClickListener {
     private RecyclerView recyclerView;
     NewRoutine_RecyclerViewAdapter adapter;
-    private Button create;
+    private Button create, addMoreBtn;
     private ArrayList<String> movementCards;
 //    private ArrayList<NewRoutine_RecyclerViewAdapter>;
     private String[] movementData = {"","","",""}; // add the movement editText info that was in the card
@@ -35,6 +35,8 @@ public class NewRoutineActivity extends AppCompatActivity implements View.OnClic
         setContentView(R.layout.activity_create_routine);
         create = findViewById(R.id.createRoutineBtn);
         create.setOnClickListener(this);
+        addMoreBtn = findViewById(R.id.addMoreBtn);
+        addMoreBtn.setOnClickListener(this);
 
         // this sets up the recycler view that was created in the NewRoutine_RecyclerViewAdapter.java
         // which allows you to add and remove cardviews of the created movements
@@ -46,14 +48,6 @@ public class NewRoutineActivity extends AppCompatActivity implements View.OnClic
         adapter = new NewRoutine_RecyclerViewAdapter(movementCards);
         recyclerView.setAdapter(adapter);
 
-        findViewById(R.id.addMoreBtn).setOnClickListener(view ->{
-            movementCards.add(Arrays.toString(movementData));
-            counter++;
-           // movementCard.add(Arrays.toString(movementData)); // add the movement editText info that was in the card
-            Log.d("movementData", "movementDataArray: " + Arrays.toString(movementData)
-            + " movementCardArray: " + movementCards);
-            adapter.notifyItemInserted(movementCards.size()-1);
-        });
     }
 
 
@@ -69,14 +63,26 @@ public class NewRoutineActivity extends AppCompatActivity implements View.OnClic
             }
 
             //below code is just for debugging, can delete later
-            String s = String.valueOf(movementCards.size());
-            //must add at least 3 cards before pressing create or else itll crash before
-            //displaying the toast
-            String d = movementCards.get(0);
-            String f = movementCards.get(1);
-            String t = movementCards.get(2);
-            String g = String.valueOf(recyclerView.getAdapter().getItemCount());
-            Toast.makeText(this, s+ g + d + f + t, Toast.LENGTH_SHORT).show();
+//            String s = String.valueOf(movementCards.size());
+//            //must add at least 3 cards before pressing create or else itll crash before
+//            //displaying the toast
+//            String d = movementCards.get(0);
+//            String f = movementCards.get(1);
+//            String t = movementCards.get(2);
+//            String g = String.valueOf(recyclerView.getAdapter().getItemCount());
+//            Toast.makeText(this, s+ g + d + f + t, Toast.LENGTH_SHORT).show();
+            Log.d("movementCardInfo","movementCardsArray: " + movementCards);
+        }
+
+
+        if (v.getId() == R.id.addMoreBtn) {
+            movementCards.add(Arrays.toString(movementData));
+            counter++;
+            // movementCard.add(Arrays.toString(movementData)); // add the movement editText info that was in the card
+            Log.d("movementData", "movementDataArray: " + Arrays.toString(movementData)
+                    + " movementCardsArray: " + movementCards);
+            adapter.notifyItemInserted(movementCards.size()-1);
+
         }
     }
 
