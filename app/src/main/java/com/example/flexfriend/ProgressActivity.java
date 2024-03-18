@@ -25,7 +25,7 @@ import java.util.concurrent.ExecutionException;
 
 public class ProgressActivity extends AppCompatActivity implements View.OnClickListener, SensorEventListener {
     private static final int img_id = 1;
-    private Button cameraButton, galleryButton;
+    private Button cameraButton, galleryButton, routinesBtn, newRoutineBtn, progressBtn; // bottom page buttons;
     private ImageCapture imageCapture;
     private Sensor accelerometer;
     private SensorManager mySensorManager;
@@ -40,6 +40,14 @@ public class ProgressActivity extends AppCompatActivity implements View.OnClickL
         cameraButton.setOnClickListener(this);
         galleryButton = findViewById(R.id.galleryButton);
         galleryButton.setOnClickListener(this);
+
+        //bottom of the page buttons
+        routinesBtn = (Button) findViewById(R.id.routinesBtn);
+        newRoutineBtn = (Button) findViewById(R.id.newRoutineBtn);
+        progressBtn = (Button) findViewById(R.id.progressBtn);
+        routinesBtn.setOnClickListener(this);
+        newRoutineBtn.setOnClickListener(this);
+        progressBtn.setOnClickListener(this);
 
         mySensorManager =  (SensorManager) getSystemService(SENSOR_SERVICE);
         accelerometer = mySensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
@@ -105,6 +113,20 @@ public class ProgressActivity extends AppCompatActivity implements View.OnClickL
         }
         if (v.getId() == R.id.galleryButton){
             //send to gallery
+        }
+        if (v.getId() == R.id.routinesBtn) {
+            // go to the routines page that lets the user choose which category of routines
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+        }
+        if (v.getId() == R.id.newRoutineBtn) {
+            //go to the create new routine activity page
+            Intent intent = new Intent(this, NewRoutineActivity.class);
+            startActivity(intent);
+        }
+        if (v.getId() == R.id.progressBtn) {
+            //go to the progress page activity where user can take and store progress photos
+            Toast.makeText(this, "currently on the progress page",Toast.LENGTH_SHORT).show();
         }
     }
 

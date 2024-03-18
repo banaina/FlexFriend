@@ -23,7 +23,6 @@ import java.util.List;
 
 public class NewRoutine_RecyclerViewAdapter extends RecyclerView.Adapter<MovementVH>{
 
-// IDK WHY THE VID PUT LIST OF STRING BUT DO IT ANYWAY AND CHANGE IT LATER
     ArrayList<String> movementInfo;
 
     public NewRoutine_RecyclerViewAdapter(ArrayList<String> movementInfo){
@@ -75,6 +74,16 @@ class MovementVH extends RecyclerView.ViewHolder{
             adapter.movementInfo.remove(getAdapterPosition());
             adapter.notifyItemRemoved(getAdapterPosition());
         });
+    }
+
+    public String getCardInfo(){
+        String timedBox = String.valueOf(timeCheckBox.isChecked());
+        String movement = movementET.getText().toString();
+        String sets = setsET.getText().toString();
+        String reps = secRepET.getText().toString();
+
+        String cardInfo = timedBox + movement + sets + reps;
+        return cardInfo;
     }
 
     public MovementVH linkAdapter(NewRoutine_RecyclerViewAdapter adapter){

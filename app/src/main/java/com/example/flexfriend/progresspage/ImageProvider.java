@@ -23,4 +23,10 @@ public class ImageProvider{
 //        }
     }
 
+    //a method to add picture items into each list so that they can be accessed within other classes
+    private static void addItem(PictureItem item){
+        dataItemList.add(item);
+        dataItemMap.put(item.getName(),item);
+    }
+
 }
