@@ -1,22 +1,15 @@
 package com.example.flexfriend;
 
-import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
-import java.util.List;
 
 // this class will add new cardviews to the recycler of NewRoutineActivity
 // the cardview model -> create_routine_model.xml
@@ -82,7 +75,7 @@ class MovementVH extends RecyclerView.ViewHolder{
         String sets = setsET.getText().toString();
         String reps = secRepET.getText().toString();
 
-        String cardInfo = timedBox + movement + sets + reps;
+        String cardInfo = timedBox+ " " + movement + " " + sets+ " " + reps;
         return cardInfo;
     }
 
