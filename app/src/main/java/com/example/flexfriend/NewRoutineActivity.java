@@ -23,7 +23,7 @@ public class NewRoutineActivity extends AppCompatActivity implements View.OnClic
     private RecyclerView recyclerView;
     NewRoutine_RecyclerViewAdapter adapter;
     private Button create, addMoreBtn;
-    private ArrayList<String> movementCards;
+    private ArrayList<String[]> movementCards;
 //    private ArrayList<NewRoutine_RecyclerViewAdapter>;
     private String[] movementData = {"","","",""}; // add the movement editText info that was in the card
     private String s;
@@ -41,7 +41,7 @@ public class NewRoutineActivity extends AppCompatActivity implements View.OnClic
         // this sets up the recycler view that was created in the NewRoutine_RecyclerViewAdapter.java
         // which allows you to add and remove cardviews of the created movements
         movementCards= new ArrayList<>();
-        movementCards.add(Arrays.toString(movementData)); // add the movement editText info that was in the card
+        movementCards.add(movementData); // add the movement editText info that was in the card
 
         recyclerView = findViewById(R.id.createRoutineRV);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -71,16 +71,18 @@ public class NewRoutineActivity extends AppCompatActivity implements View.OnClic
 //            String t = movementCards.get(2);
 //            String g = String.valueOf(recyclerView.getAdapter().getItemCount());
 //            Toast.makeText(this, s+ g + d + f + t, Toast.LENGTH_SHORT).show();
-            Log.d("movementCardInfo","movementCardsArray: " + movementCards);
+            for (int i = 0; i < movementCards.size(); i++) {
+                Log.d("movementCardInfo","movementCardsArray " + i + ": " + Arrays.toString(movementCards.get(i)));
+            }
+//            Log.d("movementCardInfo","movementCardsArray: " + Arrays.deepToString(movementData));
         }
 
 
         if (v.getId() == R.id.addMoreBtn) {
-            movementCards.add(Arrays.toString(movementData));
+            movementCards.add(movementData);
             counter++;
             // movementCard.add(Arrays.toString(movementData)); // add the movement editText info that was in the card
-            Log.d("movementData", "movementDataArray: " + Arrays.toString(movementData)
-                    + " movementCardsArray: " + movementCards);
+            Log.d("movementData"," movementCardsArray: " + movementCards);
             adapter.notifyItemInserted(movementCards.size()-1);
 
         }
