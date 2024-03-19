@@ -15,11 +15,13 @@ public class MyHelper extends SQLiteOpenHelper {
                     Constants.UID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                     Constants.CATEGORY + " TEXT, " +
                     Constants.ROUTINE_NAME + " TEXT, " +
+                    Constants.TIMED + " TEXT, " +
                     Constants.MOVEMENT + " TEXT, " +
                     Constants.NUM_OF_SETS + " TEXT, " +
                     Constants.NUM_OF_REPS + " TEXT, " +
-                    Constants.TIMED + " TEXT, " +
                     Constants.TIME + " TEXT);" ;
+
+
 
     private static final String DROP_TABLE = "DROP TABLE IF EXISTS " + Constants.TABLE_NAME;
 
