@@ -16,9 +16,9 @@ import java.util.ArrayList;
 
 public class NewRoutine_RecyclerViewAdapter extends RecyclerView.Adapter<MovementVH>{
 
-    ArrayList<String> movementInfo;
+    ArrayList<String[]> movementInfo;
 
-    public NewRoutine_RecyclerViewAdapter(ArrayList<String> movementInfo){
+    public NewRoutine_RecyclerViewAdapter(ArrayList<String[]> movementInfo){
         this.movementInfo = movementInfo;
 
     }
@@ -32,9 +32,6 @@ public class NewRoutine_RecyclerViewAdapter extends RecyclerView.Adapter<Movemen
 
     @Override
     public void onBindViewHolder(@NonNull MovementVH holder, int position) {
-//        holder.movementET.setText(items.get(position));
-//        holder.setsET.setText(items.get(position));
-//        holder.secRepET.setText(items.get(position));
 
         // initialize the view with view holder
         CheckBox timeCheckBox = holder.timeCheckBox;
@@ -69,13 +66,13 @@ class MovementVH extends RecyclerView.ViewHolder{
         });
     }
 
-    public String getCardInfo(){
+    public String[] getCardInfo(){
         String timedBox = String.valueOf(timeCheckBox.isChecked());
         String movement = movementET.getText().toString();
         String sets = setsET.getText().toString();
         String reps = secRepET.getText().toString();
 
-        String cardInfo = timedBox+ " " + movement + " " + sets+ " " + reps;
+        String[] cardInfo = {timedBox,  movement, sets, reps};
         return cardInfo;
     }
 
