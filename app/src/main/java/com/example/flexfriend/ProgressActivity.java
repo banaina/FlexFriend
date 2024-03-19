@@ -9,7 +9,10 @@ import androidx.camera.core.Preview;
 import androidx.camera.lifecycle.ProcessCameraProvider;
 import androidx.core.content.ContextCompat;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.Bitmap;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -21,15 +24,21 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.google.common.util.concurrent.ListenableFuture;
+
+import java.io.FileOutputStream;
 import java.util.concurrent.ExecutionException;
 
 public class ProgressActivity extends AppCompatActivity implements View.OnClickListener, SensorEventListener {
-    private static final int img_id = 1;
+    /* ProgressActivity Class:
+     * A class that allows the user to capture an image, save it to SharedPreferences, and then
+     * add the picture to the ImageAdapter
+     */
+    private static final int REQUEST_CAMERA = 1;
     private Button cameraButton, galleryButton, routinesBtn, newRoutineBtn, progressBtn; // bottom page buttons;
     private ImageCapture imageCapture;
     private Sensor accelerometer;
     private SensorManager mySensorManager;
-    private PicturesDatabase picsDB;
+    protected ImageAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +60,8 @@ public class ProgressActivity extends AppCompatActivity implements View.OnClickL
 
         mySensorManager =  (SensorManager) getSystemService(SENSOR_SERVICE);
         accelerometer = mySensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
-        picsDB = new PicturesDatabase(this);
+
+        adapter = new ImageAdapter(this);
     }
     protected void onResume() {
         super.onResume();
@@ -99,7 +109,6 @@ public class ProgressActivity extends AppCompatActivity implements View.OnClickL
         imageCapture = new ImageCapture.Builder()
                 .setCaptureMode(ImageCapture.CAPTURE_MODE_MINIMIZE_LATENCY)
                 .build();
-//        preview.setSurfaceProvider(previewView.getSurfaceProvider());
         cameraProvider.bindToLifecycle(this, cameraSelector, preview, imageCapture);
     }
 
@@ -109,10 +118,12 @@ public class ProgressActivity extends AppCompatActivity implements View.OnClickL
         //which means the shaking motion does not open the camera
         if (v.getId() == R.id.cameraButton){
             Intent camera_intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-            startActivityForResult(camera_intent, img_id);
+            startActivityForResult(camera_intent, REQUEST_CAMERA);
         }
         if (v.getId() == R.id.galleryButton){
             //send to gallery
+            Intent intent = new Intent(this, GalleryActivity.class);
+            startActivity(intent);
         }
         if (v.getId() == R.id.routinesBtn) {
             // go to the routines page that lets the user choose which category of routines
@@ -138,7 +149,7 @@ public class ProgressActivity extends AppCompatActivity implements View.OnClickL
         if (values[0] > 15 || values[1] > 15 || values[2] > 15) {
             Toast.makeText(this, "Phone shaken, sending to camera activity", Toast.LENGTH_SHORT).show();
             Intent camera_intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-            startActivityForResult(camera_intent, img_id);
+            startActivityForResult(camera_intent, REQUEST_CAMERA);
         }
     }
 
@@ -150,14 +161,39 @@ public class ProgressActivity extends AppCompatActivity implements View.OnClickL
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == img_id){
-            //TODO: replace so that after the user captures and image, the app asks them to label/set a date for the photo
-            boolean insert = picsDB.insertData("placeholder name", imageCapture);
-            if (insert){
-                Toast.makeText(this, "image saved to database !", Toast.LENGTH_SHORT).show();
-            } else {
-                Toast.makeText(this, "image not saved...", Toast.LENGTH_SHORT).show();
-            }
+
+        //if the result has the right request code and the result is valid, execute code
+        if (requestCode == REQUEST_CAMERA){
+            //get the image and convert it into a bitmap
+            Bundle extras = data.getExtras();
+            Bitmap imgBM =  (Bitmap) extras.get("data");
+            String imageUri = saveImageToPreferences(imgBM);
+
+            adapter.addImage(imageUri);
+            adapter.notifyDataSetChanged();
         }
+    }
+
+    private String saveImageToPreferences(Bitmap img){
+        SharedPreferences sharedPref = getPreferences(MODE_PRIVATE);
+        int nextImageIndex = sharedPref.getInt("nextImageIndex", 0);
+        //identify the file name/path
+        String imageUri = "image_" + nextImageIndex + ".png";
+        try {
+            //pass the image Uri through the open file output
+            FileOutputStream fos = openFileOutput(imageUri, Context.MODE_PRIVATE);
+            //compress the bitmap before saving it
+            img.compress(Bitmap.CompressFormat.PNG, 100, fos);
+            fos.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        //finally save it to shared preferences using the editor
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putInt("nextImageIndex", nextImageIndex +1);
+        editor.apply();
+        //return the file path name
+        return imageUri;
+
     }
 }

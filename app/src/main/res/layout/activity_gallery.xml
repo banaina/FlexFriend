@@ -4,11 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".progresspage.GalleryActivity">
+    tools:context=".GalleryActivity">
 
-    <androidx.recyclerview.widget.RecyclerView
+    <GridView
+        android:id="@+id/imgGrid"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:numColumns="3"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

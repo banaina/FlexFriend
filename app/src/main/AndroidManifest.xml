@@ -16,7 +16,10 @@
         android:theme="@style/Theme.FlexFriend"
         tools:targetApi="31">
         <activity
-            android:name=".progresspage.GalleryActivity"
+            android:name=".GalleryItemActivity"
+            android:exported="false" />
+        <activity
+            android:name=".GalleryActivity"
             android:exported="false" />
         <activity
             android:name=".RoutinesActivity"
