@@ -2,6 +2,7 @@ package com.example.flexfriend;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,8 +28,8 @@ public class Routines_RecyclerViewAdapter extends RecyclerView.Adapter<Routines_
     @Override
     public RoutinesCategoryVH onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         // this is where the layout is inflated and gives the look to the rows
-        LayoutInflater inflater = LayoutInflater.from(context);
-        View view = inflater.inflate(R.layout.routine_model_row, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.routine_model_row, parent, false);
+        //RoutinesCategoryVH routinesCategoryVH = new RoutinesCategoryVH(view);
         return new Routines_RecyclerViewAdapter.RoutinesCategoryVH(view);
     }
 
@@ -57,13 +58,14 @@ public class Routines_RecyclerViewAdapter extends RecyclerView.Adapter<Routines_
         }
 
 
-        // when user clicks one of the routines, go to the class that runs the routine
+        // when user clicks one of the routines, go to the class that runs the routine (FullRoutineActivity.java)
         // send the position of the routineName as a value
         @Override
         public void onClick(View v) {
             Toast.makeText(context, "you have clicked " + routineName.getText().toString(), Toast.LENGTH_SHORT).show();
             Intent intent = new Intent (v.getContext(), FullRoutineActivity.class);
-            intent.putExtra("NAME", getAdapterPosition());
+            Log.d("adapterPos", String.valueOf(getAdapterPosition()));
+            intent.putExtra("ROUTINE NAME", routineName.getText().toString());
             v.getContext().startActivity(intent);
         }
     }

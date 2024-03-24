@@ -45,6 +45,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             // access all the created routines of the flexibility category from the database
             // then send all the info into a recycler view
             Intent intent = new Intent(this, RoutinesActivity.class);
+            intent.putExtra("category", "flexibility"); // use the value as a key to the database
             startActivity(intent);
         }
 
@@ -52,6 +53,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             // access all the created routines of the cardio category from the database
             // then send all the info into a recycler view
             Intent intent = new Intent(this, RoutinesActivity.class);
+            intent.putExtra("category", "cardio"); // use the value as a key to the database
             startActivity(intent);
         }
 
@@ -59,6 +61,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             // access all the created routines of the strength category from the database
             // then send all the info into a recycler view
             Intent intent = new Intent(this, RoutinesActivity.class);
+            intent.putExtra("category", "strength"); // use the value as a key to the database and also change to title name
             startActivity(intent);
         }
 

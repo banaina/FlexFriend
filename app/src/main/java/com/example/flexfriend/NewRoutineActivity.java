@@ -103,26 +103,16 @@ public class NewRoutineActivity extends AppCompatActivity implements View.OnClic
 
                         // if the time is true, make reps = 0, but if time is false make time = 0
                         if (Objects.equals(movementCards.get(i)[j], "true")) { //time is true
-                          //  for (int k = 0; k < movementCards.size(); k++) {// [[,,,],[,,,]]
-                           //     for (int l = 0; l < 1; l++) {
-                                    //category, routineName, isTimed, movementName, sets, reps, time
                                     db.insertData(category, routineName, "true", movementCards.get(i)[j+1],  movementCards.get(i)[j+2],
                                             "0", movementCards.get(i)[j+3]);
-                                    Log.d("food", movementCards.get(i)[j] + movementCards.get(i)[j+1]+ movementCards.get(i)[j+2]+
-                                            "0"+ movementCards.get(i)[j+3]);
-                           //     }
-                         //   }
                         } //end of if (Objects.equals(movementCards.get(i)[j], "true"))
+
                         else{// time is false
-                          //  for (int k = 0; k < movementCards.size(); k++) {
-                               // for (int l = 0; l < 1; l++) {
                                     //category, routineName, isTimed, movementName, sets, reps, time
                                     db.insertData(category, routineName, "false", movementCards.get(i)[j + 1], movementCards.get(i)[j + 2],
                                             movementCards.get(i)[j + 3], "0");
                                     Log.d("food", movementCards.get(i)[j] + movementCards.get(i)[j+1]+ movementCards.get(i)[j+2]+
                                             "0"+ movementCards.get(i)[j+3]);
-                               // }
-                         //   }// end of nested for loop k
                         } //end of else
                     }// end of for loop j
                 }// end of for loop i
@@ -140,7 +130,6 @@ public class NewRoutineActivity extends AppCompatActivity implements View.OnClic
         if (v.getId() == R.id.addMoreBtn) {
             movementCards.add(movementData); // this just adds an empty movement card to the recycler view
             counter++;
-            // movementCard.add(Arrays.toString(movementData)); // add the movement editText info that was in the card
             Log.d("movementData"," movementCardsArray: " + movementCards);
             adapter.notifyItemInserted(movementCards.size()-1);
 

@@ -41,36 +41,21 @@ public class FlexFriendDatabase {
        // return id;
     }
 
-    public Cursor getData(){
+    public Cursor getRoutineData(String categoryName){
 
-        // this does a query search of all the data in each column
-        // if smt is null it means that it will return all the data
+        // this does a query search of the category i.e. flexibility, cardio, strength
 
         SQLiteDatabase db = helper.getWritableDatabase();
 
-        String[] columns = {Constants.UID, Constants.CATEGORY, Constants.ROUTINE_NAME,
-                Constants.MOVEMENT, Constants.NUM_OF_SETS, Constants.NUM_OF_REPS, Constants.TIMED,
-                Constants.TIME};
-        Cursor cursor = db.query(Constants.TABLE_NAME, columns, null, null, null,
+        String[] columns = {Constants.UID, Constants.CATEGORY, Constants.ROUTINE_NAME};
+        Cursor cursor = db.query(Constants.TABLE_NAME, columns, Constants.CATEGORY + "='" +categoryName+ "'", null, null,
                 null, null);
 
         return cursor;
 
     }
 
-    public Cursor getRoutineData(){
 
-        // this does a query search of all the data in the column of category and routine name
-        // groups the data by category
-
-
-        SQLiteDatabase db = helper.getWritableDatabase();
-
-        String[] columns = {Constants.UID, Constants.CATEGORY, Constants.ROUTINE_NAME};
-        Cursor cursor = db.query(Constants.TABLE_NAME, columns,null, null, Constants.CATEGORY, null, null);
-
-        return cursor;
-    }
 
 
 

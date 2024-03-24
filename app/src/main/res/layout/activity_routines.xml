@@ -7,21 +7,52 @@
     tools:context=".RoutinesActivity">
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/routinesRecyclerView"
         android:layout_width="414dp"
         android:layout_height="553dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.666"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/routineCategoryTV" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+        app:layout_constraintTop_toBottomOf="@+id/routinesRecyclerView">
+
+        <Button
+            android:id="@+id/routinesBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="36dp"
+            android:text="routines" />
+
+        <Button
+            android:id="@+id/newRoutineBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="new routine" />
+
+        <Button
+            android:id="@+id/progressBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:text="progress" />
+    </LinearLayout>
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/routineCategoryTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="52dp"
+        android:layout_marginTop="44dp"
         android:text="activity routines"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

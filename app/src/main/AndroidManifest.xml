@@ -16,6 +16,9 @@
         android:theme="@style/Theme.FlexFriend"
         tools:targetApi="31">
         <activity
+            android:name=".FullRoutineActivity"
+            android:exported="false" />
+        <activity
             android:name=".GalleryItemActivity"
             android:exported="false" />
         <activity
