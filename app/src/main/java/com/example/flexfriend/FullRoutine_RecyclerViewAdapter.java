@@ -14,29 +14,31 @@ import java.util.ArrayList;
 public class FullRoutine_RecyclerViewAdapter extends RecyclerView.Adapter<FullRoutine_RecyclerViewAdapter.FullRoutineVH> {
 
     Context context;
-    ArrayList<String[]> movements;
-    public FullRoutine_RecyclerViewAdapter(Context context, ArrayList<String[]> movements){
+    ArrayList<String> movements;
+    public FullRoutine_RecyclerViewAdapter(Context context, ArrayList<String> movements){
         this.context = context;
         this.movements = movements;
     }
     @NonNull
     @Override
     public FullRoutineVH onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.routine_desc_model, parent, false);
-        return new FullRoutine_RecyclerViewAdapter.FullRoutineVH(view);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.full_routine_model, parent, false);
+        FullRoutineVH viewHolder = new FullRoutineVH(view);
+        return viewHolder;
     }
 
     @Override
     public void onBindViewHolder(@NonNull FullRoutine_RecyclerViewAdapter.FullRoutineVH holder, int position) {
-        TextView movementNameTV = holder.movementNameTV;
-        TextView repsTV = holder.repsTV;
-        TextView setsTV = holder.setsTV;
+        String[]  results = (movements.get(position).toString()).split(",");
+        holder.movementNameTV.setText(results[0]);
+        holder.repsTV.setText(results[1]);
+        holder.setsTV.setText(results[2]);
 
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return movements.size();
     }
     public static class FullRoutineVH extends RecyclerView.ViewHolder{
         TextView movementNameTV, repsTV, setsTV;
@@ -45,9 +47,9 @@ public class FullRoutine_RecyclerViewAdapter extends RecyclerView.Adapter<FullRo
         public FullRoutineVH(@NonNull View itemView){
             super(itemView);
 
-            movementNameTV = itemView.findViewById(R.id.movementNameTV);
-            repsTV = itemView.findViewById(R.id.repsTV);
-            setsTV = itemView.findViewById(R.id.setsTV);
+            movementNameTV = itemView.findViewById(R.id.movementName);
+            repsTV = itemView.findViewById(R.id.repOrsec);
+            setsTV = itemView.findViewById(R.id.sets);
             context = itemView.getContext();
         }
     }

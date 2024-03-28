@@ -55,6 +55,30 @@ public class FlexFriendDatabase {
 
     }
 
+    public Cursor getMovementData(String routineName){
+
+        // return a string of each movement from the data base, i.e lunge, 10 rep, 3 set
+
+        SQLiteDatabase db = helper.getWritableDatabase();
+        String[] columns = {Constants.UID, Constants.ROUTINE_NAME, Constants.MOVEMENT, Constants.NUM_OF_REPS, Constants.NUM_OF_SETS};
+        Cursor cursor = db.query(Constants.TABLE_NAME, columns, Constants.ROUTINE_NAME + "='" +routineName+ "'", null, null,
+                null, null);
+
+        return cursor;
+
+    }
+public Cursor getData(){
+
+        // return a string of each movement from the data base, i.e lunge, 10 rep, 3 set
+
+        SQLiteDatabase db = helper.getWritableDatabase();
+        String[] columns = {Constants.UID, Constants.CATEGORY, Constants.ROUTINE_NAME, Constants.MOVEMENT, Constants.NUM_OF_REPS, Constants.NUM_OF_SETS};
+        Cursor cursor = db.query(Constants.TABLE_NAME, columns, null, null, null, null, null);
+
+        return cursor;
+
+    }
+
 
 
 
