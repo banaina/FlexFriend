@@ -15,6 +15,8 @@
         android:layout_margin="100dp">
 
         <!--progress bar implementation-->
+
+        <!--Text implementation in center of the progress bar-->
         <ProgressBar
             android:id="@+id/progress_bar"
             style="?android:attr/progressBarStyleHorizontal"
@@ -25,7 +27,6 @@
             android:progressDrawable="@drawable/circular_progress_bar"
             android:textAlignment="center" />
 
-        <!--Text implementation in center of the progress bar-->
         <TextView
             android:id="@+id/progress_text"
             android:layout_width="wrap_content"

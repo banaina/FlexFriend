@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 // this activity shows the full workout of a category ex(leg day - hip thrust, squats, etc.
 public class FullRoutineActivity extends AppCompatActivity implements View.OnClickListener {
@@ -25,6 +26,11 @@ public class FullRoutineActivity extends AppCompatActivity implements View.OnCli
     FlexFriendDatabase db;
     ArrayList<String> movementsArrayList;
     private String movementInfo;
+    private String movementNameIndex;
+    private String repIndex;
+    private String secIndex;
+    private String timedIndex;
+    private String setsIndex;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -56,18 +62,28 @@ public class FullRoutineActivity extends AppCompatActivity implements View.OnCli
         //get movement names
         Cursor cursor = db.getMovementData(routineName);
         // looks at the routine names
-        int index1 = cursor.getColumnIndex(Constants.MOVEMENT);
-        int index2 = cursor.getColumnIndex(Constants.NUM_OF_REPS);
-        int index3 = cursor.getColumnIndex(Constants.NUM_OF_SETS);
+        int index1 = cursor.getColumnIndex(Constants.TIMED);
+        int index2 = cursor.getColumnIndex(Constants.MOVEMENT);
+        int index3 = cursor.getColumnIndex(Constants.NUM_OF_REPS);
+        int index4 = cursor.getColumnIndex(Constants.TIME);
+        int index5 = cursor.getColumnIndex(Constants.NUM_OF_SETS);
 
-        //TODO: add the movement data into the movementsArrayList from the database
+        //add each movement to the arrayList so it can be displayed in the recyclerview using the adapter
         movementsArrayList = new ArrayList<String>();
         cursor.moveToFirst();
         while (!cursor.isAfterLast()){
-            String movementNameIndex = cursor.getString(index1);
-            String repsORsecondsIndex = cursor.getString(index2);
-            String setsIndex = cursor.getString(index3);
-            movementInfo = movementNameIndex + "," + repsORsecondsIndex + " REP" +"," + setsIndex + " SET";
+            timedIndex = cursor.getString(index1);
+            movementNameIndex = cursor.getString(index2);
+            repIndex = cursor.getString(index3);
+            secIndex = cursor.getString(index4);
+            setsIndex = cursor.getString(index5);
+
+            //list each movement and their reps according to whether it is a timed movement or not
+            if (Objects.equals(timedIndex, "true")) {
+                movementInfo = movementNameIndex + "," + secIndex + " SEC" + "," + setsIndex + " SET";
+            } else{
+                movementInfo = movementNameIndex + "," + repIndex + " REP" + "," + setsIndex + " SET";
+            }
             movementsArrayList.add(movementInfo);
             cursor.moveToNext();
         }
