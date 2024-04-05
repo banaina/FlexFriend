@@ -6,12 +6,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private Button flexibilityBtn, cardioBtn, strengthBtn; // routine category buttons
-    private Button routinesBtn, newRoutineBtn, progressBtn; // bottom page buttons
+    private TextView flexibilityBtn, cardioBtn, strengthBtn; // routine category buttons
+    private ImageButton routinesBtn, newRoutineBtn, progressBtn; // bottom page buttons
     FlexFriendDatabase db;
 
     @Override
@@ -20,14 +22,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
 
         // routine category selection ids
-        flexibilityBtn = (Button) findViewById(R.id.flexibilityBtn);
-        cardioBtn = (Button) findViewById(R.id.cardioBtn);
-        strengthBtn = (Button) findViewById(R.id.strengthBtn);
+        flexibilityBtn = (TextView) findViewById(R.id.flexibilityBtn);
+        cardioBtn = (TextView) findViewById(R.id.cardioBtn);
+        strengthBtn = (TextView) findViewById(R.id.strengthBtn);
 
         //bottom of the page buttons
-        routinesBtn = (Button) findViewById(R.id.routinesBtn);
-        newRoutineBtn = (Button) findViewById(R.id.newRoutineBtn);
-        progressBtn = (Button) findViewById(R.id.progressBtn);
+        routinesBtn = (ImageButton) findViewById(R.id.routinesBtn);
+        newRoutineBtn = (ImageButton) findViewById(R.id.newRoutineBtn);
+        progressBtn = (ImageButton) findViewById(R.id.progressBtn);
 
         // setting onclick listeners for all the buttons in the activity
         flexibilityBtn.setOnClickListener(this);

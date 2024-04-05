@@ -1,5 +1,7 @@
 package com.example.flexfriend;
 
+import static com.example.flexfriend.Constants.TABLE_NAME;
+
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -29,7 +31,7 @@ public class FlexFriendDatabase {
         contentValues.put(Constants.NUM_OF_REPS, numOfReps);
         contentValues.put(Constants.TIME, time);
 
-        long id = db.insert(Constants.TABLE_NAME, null, contentValues);
+        long id = db.insert(TABLE_NAME, null, contentValues);
         if (id < 0)
         {
             Toast.makeText(context, "fail", Toast.LENGTH_SHORT).show();
@@ -48,11 +50,22 @@ public class FlexFriendDatabase {
         SQLiteDatabase db = helper.getWritableDatabase();
 
         String[] columns = {Constants.UID, Constants.CATEGORY, Constants.ROUTINE_NAME};
-        Cursor cursor = db.query(Constants.TABLE_NAME, columns, Constants.CATEGORY + "='" +categoryName+ "'", null, null,
+        Cursor cursor = db.query(TABLE_NAME, columns, Constants.CATEGORY + "='" +categoryName+ "'", null, null,
                 null, null);
 
         return cursor;
 
+    }
+
+    // below is the method for deleting our course.
+    public void deleteRoutine(String routineName) {
+
+        SQLiteDatabase db = helper.getWritableDatabase();
+
+        // the table we are deleting from, the column we are deleting from, and the routine
+        // in the column we are deleting from passed as a parameter
+        db.delete(TABLE_NAME, "ROUTINE_NAME = ?", new String[]{routineName});
+        db.close();
     }
 
 

@@ -1,6 +1,8 @@
 package com.example.flexfriend;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -13,9 +15,12 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 
@@ -30,7 +35,7 @@ public class RoutinesActivity extends AppCompatActivity implements View.OnClickL
     private LinearLayoutManager mLayoutManager;
     MyHelper helper;
     private ArrayList<String> routinesArrayList;
-    Button routinesBtn, newRoutineBtn, progressBtn;
+    ImageButton routinesBtn, newRoutineBtn, progressBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,9 +46,9 @@ public class RoutinesActivity extends AppCompatActivity implements View.OnClickL
         routinesRecycler = findViewById(R.id.routinesRecyclerView);
 
         //bottom of the page buttons
-        routinesBtn = (Button) findViewById(R.id.routinesBtn);
-        newRoutineBtn = (Button) findViewById(R.id.newRoutineBtn);
-        progressBtn = (Button) findViewById(R.id.progressBtn);
+        routinesBtn = (ImageButton) findViewById(R.id.routinesBtn);
+        newRoutineBtn = (ImageButton) findViewById(R.id.newRoutineBtn);
+        progressBtn = (ImageButton) findViewById(R.id.progressBtn);
 
         routinesBtn.setOnClickListener(this);
         newRoutineBtn.setOnClickListener(this);
@@ -84,6 +89,9 @@ public class RoutinesActivity extends AppCompatActivity implements View.OnClickL
         mLayoutManager = new LinearLayoutManager(this);
         routinesRecycler.setLayoutManager(mLayoutManager);
 
+        ItemTouchHelper helper = new ItemTouchHelper(callback);
+        helper.attachToRecyclerView(routinesRecycler);
+
     }
 
     @Override
@@ -106,4 +114,22 @@ public class RoutinesActivity extends AppCompatActivity implements View.OnClickL
             startActivity(intent);
         }
     }
+
+    ItemTouchHelper.SimpleCallback callback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+        @Override
+        public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+            return false;
+        }
+
+        @Override
+        public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+            Toast.makeText(RoutinesActivity.this, "Routine Deleted", Toast.LENGTH_SHORT).show();
+            int routineNameIndex = viewHolder.getAdapterPosition();
+            String routineName = routinesArrayList.get(routineNameIndex);
+
+            routinesArrayList.remove(viewHolder.getAdapterPosition());
+            routinesAdapter.notifyDataSetChanged();
+            db.deleteRoutine(routineName);
+        }
+    };
 }

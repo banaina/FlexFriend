@@ -66,6 +66,7 @@ public class Routines_RecyclerViewAdapter extends RecyclerView.Adapter<Routines_
             Intent intent = new Intent (v.getContext(), FullRoutineActivity.class);
             Log.d("adapterPos", String.valueOf(getAdapterPosition()));
             intent.putExtra("ROUTINE NAME", routineName.getText().toString());
+            Log.d("routineName", routineName.getText().toString());
             v.getContext().startActivity(intent);
         }
     }
