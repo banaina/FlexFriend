@@ -18,19 +18,13 @@ import java.util.Objects;
 
 // this activity shows the full workout of a category ex(leg day - hip thrust, squats, etc.
 public class FullRoutineActivity extends AppCompatActivity implements View.OnClickListener {
-    TextView routineNameTV;
-    RecyclerView fullRoutineRecyclerView;
-    FullRoutine_RecyclerViewAdapter adapter;
-    MyHelper helper;
-    Button playRoutineBtn, routinesBtn, newRoutineBtn, progressBtn;
-    FlexFriendDatabase db;
-    ArrayList<String> movementsArrayList;
-    private String movementInfo;
-    private String movementNameIndex;
-    private String repIndex;
-    private String secIndex;
-    private String timedIndex;
-    private String setsIndex;
+    private TextView routineNameTV;
+    private RecyclerView fullRoutineRecyclerView;
+    private FullRoutine_RecyclerViewAdapter adapter;
+    private MyHelper helper;
+    private Button playRoutineBtn, routinesBtn, newRoutineBtn, progressBtn;
+    private FlexFriendDatabase db;
+    private ArrayList<String> movementsArrayList;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -72,13 +66,14 @@ public class FullRoutineActivity extends AppCompatActivity implements View.OnCli
         movementsArrayList = new ArrayList<String>();
         cursor.moveToFirst();
         while (!cursor.isAfterLast()){
-            timedIndex = cursor.getString(index1);
-            movementNameIndex = cursor.getString(index2);
-            repIndex = cursor.getString(index3);
-            secIndex = cursor.getString(index4);
-            setsIndex = cursor.getString(index5);
+            String timedIndex = cursor.getString(index1);
+            String movementNameIndex = cursor.getString(index2);
+            String repIndex = cursor.getString(index3);
+            String secIndex = cursor.getString(index4);
+            String setsIndex = cursor.getString(index5);
 
             //list each movement and their reps according to whether it is a timed movement or not
+            String movementInfo;
             if (Objects.equals(timedIndex, "true")) {
                 movementInfo = movementNameIndex + "," + secIndex + " SEC" + "," + setsIndex + " SET";
             } else{
@@ -97,7 +92,9 @@ public class FullRoutineActivity extends AppCompatActivity implements View.OnCli
     public void onClick(View v) {
         if (v.getId() == R.id.playRoutineBtn){
             //go to the activity that plays the routine
-            Intent intent = new Intent(this, PlayRoutineActivity.class);
+            //TODO: change to playroutine activity after debugging
+            Intent intent = new Intent(this, MovementScreenActivity.class);
+            intent.putExtra("movements arraylist", movementsArrayList);
             startActivity(intent);
         }
         if (v.getId() == R.id.routinesBtn) {
