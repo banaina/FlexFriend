@@ -34,7 +34,7 @@ public class ProgressActivity extends AppCompatActivity implements View.OnClickL
      * add the picture to the ImageAdapter
      */
     private static final int REQUEST_CAMERA = 1;
-    private Button cameraButton, galleryButton, routinesBtn, newRoutineBtn, progressBtn; // bottom page buttons;
+    private Button cameraButton, galleryButton, routinesBtn, newRoutineBtn, progressBtn, logBtn;
     private ImageCapture imageCapture;
     private Sensor accelerometer;
     private SensorManager mySensorManager;
@@ -49,6 +49,8 @@ public class ProgressActivity extends AppCompatActivity implements View.OnClickL
         cameraButton.setOnClickListener(this);
         galleryButton = findViewById(R.id.galleryButton);
         galleryButton.setOnClickListener(this);
+        logBtn = findViewById(R.id.logButton);
+        logBtn.setOnClickListener(this);
 
         //bottom of the page buttons
         routinesBtn = (Button) findViewById(R.id.routinesBtn);
@@ -123,6 +125,11 @@ public class ProgressActivity extends AppCompatActivity implements View.OnClickL
         if (v.getId() == R.id.galleryButton){
             //send to gallery
             Intent intent = new Intent(this, GalleryActivity.class);
+            startActivity(intent);
+        }
+        if (v.getId() == R.id.logButton) {
+            //send to log page
+            Intent intent = new Intent(this, LogProgressActivity.class);
             startActivity(intent);
         }
         if (v.getId() == R.id.routinesBtn) {

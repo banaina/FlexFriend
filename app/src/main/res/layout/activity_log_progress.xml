@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:ap="http://schemas.android.com/apk/res-auto"
+    tools:context=".LogProgressActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/userLogText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="100dp"
+            android:layout_marginBottom="10dp"
+            android:ems="10"
+            android:hint="enter weight here"
+            android:inputType="number"
+            android:textAlignment="center" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/addWeight"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:textColor="#171717"
+            android:background="#D6D6D6"
+            android:text="Add" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="30dp"
+            android:orientation="vertical">
+
+            <com.androidplot.xy.XYPlot
+                style="@style/APDefacto.Light"
+                android:id="@+id/plot"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                ap:title="Your Weight Over Time"
+                ap:rangeTitle="range"
+                ap:domainTitle="domain"
+                />
+
+        </LinearLayout>
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

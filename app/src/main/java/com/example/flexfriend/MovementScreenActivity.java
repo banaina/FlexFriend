@@ -18,8 +18,7 @@ import java.util.ArrayList;
 
 public class MovementScreenActivity extends AppCompatActivity implements View.OnClickListener {
     /* MovementScreenActivity Class:
-     * As soon as the startup timer runs out from the PlayRoutineActivity screen, this
-     * class will help display each movement as a fragment containing the information from the
+     * This class will help display each movement as a fragment containing the information from the
      * database about the routine details.
      */
 
@@ -94,13 +93,6 @@ public class MovementScreenActivity extends AppCompatActivity implements View.On
         fragManager.beginTransaction()//transact from one fragment to another
                 .replace(R.id.fragContainer, PlayRoutineFragment.class, bundle)//replace the current fragment with another
                 .setReorderingAllowed(true).addToBackStack("name").commit();
-
-//        if (infoItems[1].contains("SEC")) {
-//            repsOrsecs = Integer.parseInt(infoItems[1].replace(" SEC", ""));
-//        } else if (infoItems[1].contains("REP")) {
-//            repsOrsecs = Integer.parseInt(infoItems[1].replace(" REP", ""));
-//        }
-//        timed = infoItems[1].contains("SEC");
     }
 
 }

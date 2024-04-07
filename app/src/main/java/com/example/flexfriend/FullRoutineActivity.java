@@ -92,7 +92,6 @@ public class FullRoutineActivity extends AppCompatActivity implements View.OnCli
     public void onClick(View v) {
         if (v.getId() == R.id.playRoutineBtn){
             //go to the activity that plays the routine
-            //TODO: change to playroutine activity after debugging
             Intent intent = new Intent(this, MovementScreenActivity.class);
             intent.putExtra("movements arraylist", movementsArrayList);
             startActivity(intent);

@@ -206,14 +206,13 @@ public class PlayRoutineFragment extends Fragment implements View.OnClickListene
         binding.downButton.setVisibility(View.VISIBLE);
         binding.startTimerButton.setOnClickListener(this);
         binding.startTimerButton.setVisibility(View.GONE);
+        binding.progressBarFrag.setProgress(100);
         binding.fragMovementName.setText(movementString);
         binding.fragProgressRepOrSec.setText(repsOrSecsString);
         binding.fragSets.setText(setsString);
 
         if (timed){
             binding.startTimerButton.setVisibility(View.VISIBLE);
-//            binding.upButton.setVisibility(View.GONE);
-//            binding.downButton.setVisibility(View.GONE);
         }
     }
 
@@ -223,7 +222,7 @@ public class PlayRoutineFragment extends Fragment implements View.OnClickListene
             public void onTick(long millisUntilFinished) {
                 timerRunning =true;
                 i--;
-                binding.progressBarFrag.setProgress(100/repsOrsecs * i);
+                binding.progressBarFrag.setProgress(100 - (100/repsOrsecs * i));
                 binding.fragProgressRepOrSec.setText(String.valueOf(i));
             }
 
@@ -231,7 +230,7 @@ public class PlayRoutineFragment extends Fragment implements View.OnClickListene
                 if (sets<0) sets-=1;
                 binding.fragSets.setText(String.valueOf(sets + " SET"));
                 binding.fragProgressRepOrSec.setText(repsOrsecs + " SEC");
-                binding.progressBarFrag.setProgress(0);
+                binding.progressBarFrag.setProgress(100);
                 timerRunning = false;
             }
         }.start();
@@ -333,26 +332,4 @@ public class PlayRoutineFragment extends Fragment implements View.OnClickListene
         super.onDestroyView();
         binding = null;
     }
-
-
-//    @Override
-//    public void sendData(String[] data) {
-//
-//        if(data != null) {
-//            movementString = data[0];
-//            repsOrSecsString = data[1];
-//            setsString = data[2];
-////
-//            sets = Integer.parseInt(setsString.replace(" SET", ""));
-//            if (repsOrSecsString.contains("SEC")) {
-//                repsOrsecs = Integer.parseInt(repsOrSecsString.replace(" SEC", ""));
-//            } else if (repsOrSecsString.contains("REP")) {
-//                repsOrsecs = Integer.parseInt(repsOrSecsString.replace(" REP", ""));
-//            }
-//            Log.d("infoSTuff", movementString + repsOrSecsString + setsString);
-//            setInfo();
-////            Toast.makeText(requireActivity().getApplicationContext(), movementString + repsOrSecsString + setsString, Toast.LENGTH_LONG).show();
-//        }
-//
-//    }
 }
