@@ -60,7 +60,7 @@
             android:id="@+id/setsET"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:ems="5"
+            android:ems="4"
             android:hint="0 sets"
             android:inputType="number" />
 
@@ -70,29 +70,45 @@
             android:layout_marginTop="10dp"
             android:orientation="horizontal">
 
-            <EditText
-                android:id="@+id/secRepET"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:ems="4"
-                android:hint="0 sec/reps"
-                android:layout_gravity="start"
-                android:inputType="number" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraint"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-            <View
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_weight="10"
-                android:layout_gravity="center"/>
+                <EditText
+                    android:id="@+id/secRepET"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ems="4"
+                    android:hint="0 sec/reps"
+                    android:inputType="number"
+                    app:layout_constraintBottom_toBottomOf="@id/constraint"
+                    app:layout_constraintEnd_toStartOf="@id/deleteBtn"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/constraint" />
 
-            <Button
-                android:id="@+id/deleteBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="end"
-                android:layout_weight="1"
-                android:text="delete" />
+                <!--            <View-->
+                <!--                android:layout_width="0dp"-->
+                <!--                android:layout_height="0dp"-->
+                <!--                android:layout_weight="10"-->
+                <!--                android:layout_gravity="center"/>-->
+
+                <Button
+                    android:id="@+id/deleteBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_marginStart="128dp"
+                    android:text="delete"
+                    app:layout_constraintBottom_toBottomOf="@id/constraint"
+                    app:layout_constraintStart_toEndOf="@id/secRepET"
+                    app:layout_constraintTop_toTopOf="@id/constraint"
+                    app:layout_constraintVertical_bias="1.0" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
         </LinearLayout>
 
     </LinearLayout>

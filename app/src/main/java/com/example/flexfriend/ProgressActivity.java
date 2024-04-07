@@ -21,6 +21,7 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.google.common.util.concurrent.ListenableFuture;
@@ -34,7 +35,8 @@ public class ProgressActivity extends AppCompatActivity implements View.OnClickL
      * add the picture to the ImageAdapter
      */
     private static final int REQUEST_CAMERA = 1;
-    private Button cameraButton, galleryButton, routinesBtn, newRoutineBtn, progressBtn; // bottom page buttons;
+    private Button cameraButton, galleryButton;
+    private ImageButton routinesBtn, newRoutineBtn, progressBtn;// bottom page buttons;
     private ImageCapture imageCapture;
     private Sensor accelerometer;
     private SensorManager mySensorManager;
@@ -51,9 +53,9 @@ public class ProgressActivity extends AppCompatActivity implements View.OnClickL
         galleryButton.setOnClickListener(this);
 
         //bottom of the page buttons
-        routinesBtn = (Button) findViewById(R.id.routinesBtn);
-        newRoutineBtn = (Button) findViewById(R.id.newRoutineBtn);
-        progressBtn = (Button) findViewById(R.id.progressBtn);
+        routinesBtn = (ImageButton) findViewById(R.id.routinesBtn);
+        newRoutineBtn = (ImageButton) findViewById(R.id.newRoutineBtn);
+        progressBtn = (ImageButton) findViewById(R.id.progressBtn);
         routinesBtn.setOnClickListener(this);
         newRoutineBtn.setOnClickListener(this);
         progressBtn.setOnClickListener(this);

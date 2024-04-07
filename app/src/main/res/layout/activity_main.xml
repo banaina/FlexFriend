@@ -60,6 +60,7 @@
                     android:paddingEnd="75dp"
                     android:paddingBottom="30dp"
                     android:text="Flexibility"
+                    android:textStyle="bold"
                     android:textColor="@color/white"
                     android:textSize="17dp" />
             </androidx.cardview.widget.CardView>
@@ -89,6 +90,7 @@
                     android:paddingEnd="75dp"
                     android:paddingBottom="30dp"
                     android:text="  Cardio  "
+                    android:textStyle="bold"
                     android:textColor="@color/white"
                     android:textSize="17dp" />
             </androidx.cardview.widget.CardView>
@@ -116,6 +118,7 @@
                     android:paddingTop="30dp"
                     android:paddingEnd="75dp"
                     android:paddingBottom="30dp"
+                    android:textStyle="bold"
                     android:text="Strength"
                     android:textColor="@color/white"
                     android:textSize="17dp" />

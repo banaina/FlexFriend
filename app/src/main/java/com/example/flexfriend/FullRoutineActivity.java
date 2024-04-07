@@ -23,8 +23,7 @@ public class FullRoutineActivity extends AppCompatActivity implements View.OnCli
     private RecyclerView fullRoutineRecyclerView;
     private FullRoutine_RecyclerViewAdapter adapter;
     private MyHelper helper;
-    private Button routinesBtn, newRoutineBtn, progressBtn;
-    private ImageButton playRoutineBtn, backBtn;
+    private ImageButton routinesBtn, newRoutineBtn, progressBtn, playRoutineBtn, backBtn;
     private FlexFriendDatabase db;
     private ArrayList<String> movementsArrayList;
 
@@ -39,9 +38,9 @@ public class FullRoutineActivity extends AppCompatActivity implements View.OnCli
         //buttons
         playRoutineBtn = (ImageButton) findViewById(R.id.playRoutineBtn);
         backBtn = (ImageButton) findViewById(R.id.backBtn);
-        routinesBtn = (Button) findViewById(R.id.routinesBtn);
-        newRoutineBtn = (Button) findViewById(R.id.newRoutineBtn);
-        progressBtn = (Button) findViewById(R.id.progressBtn);
+        routinesBtn = (ImageButton) findViewById(R.id.routinesBtn);
+        newRoutineBtn = (ImageButton) findViewById(R.id.newRoutineBtn);
+        progressBtn = (ImageButton) findViewById(R.id.progressBtn);
 
         //register the buttons
         playRoutineBtn.setOnClickListener(this);
