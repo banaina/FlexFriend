@@ -58,9 +58,9 @@
 
         <EditText
             android:id="@+id/setsET"
-            android:layout_width="99dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:ems="10"
+            android:ems="5"
             android:hint="0 sets"
             android:inputType="number" />
 
@@ -72,18 +72,26 @@
 
             <EditText
                 android:id="@+id/secRepET"
-                android:layout_width="153dp"
-                android:layout_height="40dp"
-                android:layout_marginRight="170dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:ems="10"
+                android:ems="4"
                 android:hint="0 sec/reps"
+                android:layout_gravity="start"
                 android:inputType="number" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="10"
+                android:layout_gravity="center"/>
 
             <Button
                 android:id="@+id/deleteBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_weight="1"
                 android:text="delete" />
         </LinearLayout>
 
