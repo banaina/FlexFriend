@@ -19,13 +19,34 @@
         android:orientation="vertical"
         android:padding="10dp">
 
-        <CheckBox
-            android:id="@+id/timeCheckBox"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:checked="false"
-            android:text="timed"
-            tools:layout_editor_absoluteY="132dp" />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <CheckBox
+                android:id="@+id/timeCheckBox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="false"
+                tools:layout_editor_absoluteY="132dp" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/time"
+                android:layout_gravity="center"
+                android:contentDescription="time image"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="timed"
+                android:layout_marginStart="5dp"
+                android:layout_weight="1"/>
+
+        </LinearLayout>
+
+
 
         <EditText
             android:id="@+id/movementET"
