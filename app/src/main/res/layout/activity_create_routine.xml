@@ -10,16 +10,17 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:paddingStart="30dp"
+        android:paddingStart="15dp"
         android:paddingTop="20dp"
-        android:paddingEnd="30dp"
+        android:paddingEnd="15dp"
         android:paddingBottom="15dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_weight="3">
+            android:layout_weight="1"
+            >
 
 
         <ImageView
@@ -27,14 +28,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:layout_weight="3"
             android:src="@drawable/edit" />
 
         <EditText
             android:id="@+id/routineNameET"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
             android:ems="15"
+            android:layout_weight="1"
             android:hint="Give your routine a name"
             android:inputType="text"/>
 
@@ -45,13 +47,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Category:"/>
+            android:text="Category: "/>
 
         <RadioGroup
             android:id="@+id/categoryRadioGroup"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="0"
+            android:layout_weight="1"
             android:orientation="horizontal">
 
             <RadioButton
@@ -85,25 +87,24 @@
             android:layout_height="wrap_content"
             android:layout_weight="50"/>
 
-        <ImageButton
-            android:id="@+id/addMoreBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center|bottom"
-            android:layout_weight="1"
-            android:background="@android:color/transparent"
-            android:contentDescription="addMoreBtn"
-            android:src="@drawable/add"
-            android:text="add more" />
-
         <Button
             android:id="@+id/createRoutineBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="0"
-            android:layout_marginTop="10dp"
             android:layout_gravity="center"
             android:text="Create" />
+
+        <ImageButton
+            android:id="@+id/addMoreBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="addMoreBtn"
+            android:background="@android:color/transparent"
+            android:src="@drawable/addition"
+            android:layout_weight="1"
+            android:layout_gravity="center|bottom"
+            android:text="add more" />
 
     </LinearLayout>
 
