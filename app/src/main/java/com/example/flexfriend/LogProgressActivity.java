@@ -49,14 +49,6 @@ public class LogProgressActivity extends AppCompatActivity implements View.OnCli
         numbers.add(1);
         numbers.add(2);
         numbers.add(3);
-
-        seriesFormat = new LineAndPointFormatter(
-                Color.RED, Color.GREEN, null, null);
-        seriesFormat.setInterpolationParams(new CatmullRomInterpolator.Params(10,
-                CatmullRomInterpolator.Type.Centripetal));
-        weightPlot.addSeries(series, seriesFormat);
-        PanZoom.attach(weightPlot);
-
     }
 
     @Override
@@ -73,6 +65,12 @@ public class LogProgressActivity extends AppCompatActivity implements View.OnCli
                 plotPts.add(weight);
                 series = new SimpleXYSeries(plotPts,
                 SimpleXYSeries.ArrayFormat.Y_VALS_ONLY, "Weight");
+                seriesFormat = new LineAndPointFormatter(
+                        Color.RED, Color.GREEN, null, null);
+                seriesFormat.setInterpolationParams(new CatmullRomInterpolator.Params(10,
+                        CatmullRomInterpolator.Type.Centripetal));
+                weightPlot.addSeries(series, seriesFormat);
+                PanZoom.attach(weightPlot);
                 weightPlot.addSeries(series, seriesFormat);
 
                 weightPlot.getGraph().getLineLabelStyle(XYGraphWidget.Edge.BOTTOM).setFormat(new Format() {

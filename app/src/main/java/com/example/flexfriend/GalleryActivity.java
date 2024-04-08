@@ -14,6 +14,10 @@ import com.example.flexfriend.R;
 public class GalleryActivity extends ProgressActivity {
     /* GalleryActivity Class:
      * This class displays all the images captured and saved from the camera into a grid view
+     *
+     * References used:
+     * https://www.youtube.com/watch?v=0YL3pms_0JE
+     * https://www.youtube.com/watch?v=Jp6QHc5ip18&t=1028s
      */
 
     private GridView imgGrid;
