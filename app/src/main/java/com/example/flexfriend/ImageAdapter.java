@@ -12,10 +12,11 @@ import android.widget.ImageView;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ImageAdapter extends BaseAdapter {
+public class ImageAdapter extends BaseAdapter implements Serializable {
     /* ImageAdapter Class:
     * This class allows the app to display multiple images within the gallery gridview
     * */

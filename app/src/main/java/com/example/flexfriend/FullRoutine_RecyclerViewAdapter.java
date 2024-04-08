@@ -29,7 +29,7 @@ public class FullRoutine_RecyclerViewAdapter extends RecyclerView.Adapter<FullRo
 
     @Override
     public void onBindViewHolder(@NonNull FullRoutine_RecyclerViewAdapter.FullRoutineVH holder, int position) {
-        String[]  results = (movements.get(position).toString()).split(",");
+        String[] results = (movements.get(position).toString()).split(",");
         holder.movementNameTV.setText(results[0]);
         holder.repsTV.setText(results[1]);
         holder.setsTV.setText(results[2]);

@@ -8,6 +8,7 @@ import android.widget.Toast;
 
 public class MyHelper extends SQLiteOpenHelper {
     private Context context;
+    private static MyHelper mInstance = null;
 
     private static final String CREATE_TABLE =
             "CREATE TABLE "+
@@ -25,9 +26,17 @@ public class MyHelper extends SQLiteOpenHelper {
 
     private static final String DROP_TABLE = "DROP TABLE IF EXISTS " + Constants.TABLE_NAME;
 
+
+    public static MyHelper getInstance(Context ctx) {
+        if (mInstance == null) {
+            mInstance = new MyHelper(ctx.getApplicationContext());
+        }
+        return mInstance;
+    }
+
     public MyHelper(Context context){
         super (context, Constants.DATABASE_NAME, null, Constants.DATABASE_VERSION);
-        this.context = context;
+//        this.context = context;
     }
 
 

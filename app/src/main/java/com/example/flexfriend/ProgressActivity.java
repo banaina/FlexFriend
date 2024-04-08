@@ -22,6 +22,7 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import androidx.biometric.BiometricPrompt;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
@@ -30,16 +31,18 @@ import android.widget.Toast;
 import com.google.common.util.concurrent.ListenableFuture;
 
 import java.io.FileOutputStream;
+import java.io.Serializable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executor;
 
-public class ProgressActivity extends AppCompatActivity implements View.OnClickListener, SensorEventListener {
+public class ProgressActivity extends AppCompatActivity implements View.OnClickListener, SensorEventListener, Serializable {
     /* ProgressActivity Class:
      * A class that allows the user to capture an image, save it to SharedPreferences, and then
      * add the picture to the ImageAdapter
      *
      * References used:
      * https://www.youtube.com/watch?v=0YL3pms_0JE
+     * https://developer.android.com/media/camera/camera-deprecated/camera-api
      * https://developer.android.com/jetpack/androidx/releases/biometric
      * https://www.youtube.com/watch?v=RInxqVYnvU8
      * https://www.youtube.com/watch?v=tXHWyt8g5jc
@@ -113,6 +116,7 @@ public class ProgressActivity extends AppCompatActivity implements View.OnClickL
                     super.onAuthenticationSucceeded(result);
                     notifyUser("Authentication Succeeded");
                     Intent intent = new Intent(ProgressActivity.this, GalleryActivity.class);
+                    intent.putExtra("adapter", adapter);
                     startActivity(intent);
                 }
                 @Override
@@ -204,6 +208,7 @@ public class ProgressActivity extends AppCompatActivity implements View.OnClickL
             } else {
                 //start activity by default if biometric lock is not enabled
                 Intent intent = new Intent(ProgressActivity.this, GalleryActivity.class);
+                intent.putExtra("adapter", adapter);
                 startActivity(intent);
             }
         }
