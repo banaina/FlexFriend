@@ -23,7 +23,8 @@ public class FullRoutineActivity extends AppCompatActivity implements View.OnCli
     private RecyclerView fullRoutineRecyclerView;
     private FullRoutine_RecyclerViewAdapter adapter;
     private MyHelper helper;
-    private ImageButton routinesBtn, newRoutineBtn, progressBtn, playRoutineBtn, backBtn;
+    private ImageButton routinesBtn, newRoutineBtn, progressBtn;
+    private ImageButton playRoutineBtn, backBtn;
     private FlexFriendDatabase db;
     private ArrayList<String> movementsArrayList;
 
