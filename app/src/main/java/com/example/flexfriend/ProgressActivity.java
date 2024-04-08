@@ -17,6 +17,7 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import androidx.biometric.BiometricPrompt;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
@@ -27,11 +28,14 @@ import com.google.common.util.concurrent.ListenableFuture;
 
 import java.io.FileOutputStream;
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Executor;
 
 public class ProgressActivity extends AppCompatActivity implements View.OnClickListener, SensorEventListener {
     /* ProgressActivity Class:
      * A class that allows the user to capture an image, save it to SharedPreferences, and then
      * add the picture to the ImageAdapter
+     *
+     * Reference used: https://www.youtube.com/watch?v=RInxqVYnvU8
      */
     private static final int REQUEST_CAMERA = 1;
     private Button cameraButton, galleryButton, routinesBtn, newRoutineBtn, progressBtn, logBtn;
@@ -39,6 +43,7 @@ public class ProgressActivity extends AppCompatActivity implements View.OnClickL
     private Sensor accelerometer;
     private SensorManager mySensorManager;
     protected ImageAdapter adapter;
+    androidx.biometric.BiometricPrompt biometricPrompt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +69,41 @@ public class ProgressActivity extends AppCompatActivity implements View.OnClickL
         accelerometer = mySensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
 
         adapter = new ImageAdapter(this);
+    }
+
+    private androidx.biometric.BiometricPrompt getPrompt(){
+        Executor executor = ContextCompat.getMainExecutor(this);
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.P) {
+            BiometricPrompt.AuthenticationCallback callback = new BiometricPrompt.AuthenticationCallback() {
+                //define what happens depending on which result is received from users fingerprint
+                @Override
+                public void onAuthenticationError(int errorCode, CharSequence errString) {
+                    super.onAuthenticationError(errorCode, errString);
+                    notifyUser(errString.toString());
+                }
+                @Override
+                public void onAuthenticationSucceeded(BiometricPrompt.AuthenticationResult result) {
+                    super.onAuthenticationSucceeded(result);
+                    notifyUser("Authentication Succeeded");
+                    Intent intent = new Intent(ProgressActivity.this, GalleryActivity.class);
+                    startActivity(intent);
+                }
+                @Override
+                public void onAuthenticationFailed() {
+                    super.onAuthenticationFailed();
+                    notifyUser("Authentication failed");
+                }
+            };
+
+            //return the fingerprint prompt result
+            biometricPrompt = new androidx.biometric.
+                    BiometricPrompt(this, executor, callback);
+        }
+        return biometricPrompt;
+    }
+    
+    private void notifyUser(String msg){
+        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
     }
     protected void onResume() {
         super.onResume();
@@ -123,9 +163,14 @@ public class ProgressActivity extends AppCompatActivity implements View.OnClickL
             startActivityForResult(camera_intent, REQUEST_CAMERA);
         }
         if (v.getId() == R.id.galleryButton){
-            //send to gallery
-            Intent intent = new Intent(this, GalleryActivity.class);
-            startActivity(intent);
+            //request a biometric prompt and if its true then send to gallery
+            BiometricPrompt.PromptInfo promptInfo = new BiometricPrompt.PromptInfo.Builder()
+                    .setTitle("Please Verify")
+                    .setDescription("User Authentication is Required to Proceed")
+                    .setNegativeButtonText("Cancel")
+                    .build();
+            //authenticate the result from the prompt/users fingerprint
+            getPrompt().authenticate(promptInfo);
         }
         if (v.getId() == R.id.logButton) {
             //send to log page
