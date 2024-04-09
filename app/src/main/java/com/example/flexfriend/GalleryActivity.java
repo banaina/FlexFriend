@@ -12,7 +12,7 @@ import android.widget.Toast;
 
 import com.example.flexfriend.R;
 
-public class GalleryActivity extends AppCompatActivity{
+public class GalleryActivity extends ProgressActivity{
     /* GalleryActivity Class:
      * This class displays all the images captured and saved from the camera into a grid view
      *
@@ -22,29 +22,15 @@ public class GalleryActivity extends AppCompatActivity{
      */
 
     private GridView imgGrid;
-    private ImageAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gallery);
 
-
         //set the adapter holding the image uri's to the grid view
         imgGrid = findViewById(R.id.imgGrid);
-        adapter = (ImageAdapter) getIntent().getSerializableExtra("adapter");
         imgGrid.setAdapter(adapter);
 
-//        Code below is for future implementation and improving gallery activity
-        imgGrid.setOnItemClickListener(new AdapterView.OnItemClickListener(){
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String imageUri = adapter.getItem(position);
-                Intent intent = new Intent(getApplicationContext(), GalleryItemActivity.class);
-                intent.putExtra("imageuri", imageUri);
-//                Toast.makeText(GalleryActivity.this, imageUri, Toast.LENGTH_LONG).show();
-                startActivity(intent);
-            }
-        });
     }
 }

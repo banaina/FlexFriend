@@ -30,7 +30,7 @@
             android:layout_marginBottom="20dp"
             android:ems="10"
             android:hint="enter date dd/mm/yyyy"
-            android:inputType="number"
+            android:inputType="text"
             android:textAlignment="center" />
 
         <androidx.appcompat.widget.AppCompatButton
