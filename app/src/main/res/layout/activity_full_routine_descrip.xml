@@ -22,11 +22,11 @@
             <ImageButton
                 android:id="@+id/backBtn"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/arrow"
-                android:contentDescription="back button"
+                android:layout_height="38dp"
+                android:layout_gravity="center"
                 android:background="@android:color/transparent"
-                android:layout_gravity="center"/>
+                android:contentDescription="back button"
+                android:src="@drawable/arrow" />
 
             <TextView
                 android:id="@+id/routineNameTV"
@@ -65,51 +65,58 @@
             android:layout_weight="0"
             android:background="@color/black" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/linearLayout"
+        <com.google.android.material.bottomnavigation.BottomNavigationView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:layout_weight="0.5">
+            android:background="@android:color/transparent"
+            android:layout_weight="0">
 
-            <ImageButton
-                android:id="@+id/routinesBtn"
-                android:layout_width="wrap_content"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/linearLayout"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@android:color/transparent"
-                android:contentDescription="routinesButton"
-                android:src="@drawable/heart"
-                app:layout_constraintBottom_toBottomOf="@id/linearLayout"
-                app:layout_constraintEnd_toStartOf="@id/newRoutineBtn"
-                app:layout_constraintStart_toStartOf="@id/linearLayout"
-                app:layout_constraintTop_toTopOf="@id/linearLayout"/>
+                android:layout_gravity="center"
+                android:layout_weight="0.5">
 
-            <ImageButton
-                android:id="@+id/newRoutineBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@android:color/transparent"
-                android:contentDescription="newRoutineButton"
-                android:src="@drawable/addition"
-                app:layout_constraintBottom_toBottomOf="@id/linearLayout"
-                app:layout_constraintEnd_toStartOf="@id/progressBtn"
-                app:layout_constraintStart_toEndOf="@id/routinesBtn"
-                app:layout_constraintTop_toTopOf="@id/linearLayout"
+                <ImageButton
+                    android:id="@+id/routinesBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:contentDescription="routinesButton"
+                    android:src="@drawable/heart"
+                    app:layout_constraintBottom_toBottomOf="@id/linearLayout"
+                    app:layout_constraintEnd_toStartOf="@id/newRoutineBtn"
+                    app:layout_constraintStart_toStartOf="@id/linearLayout"
+                    app:layout_constraintTop_toTopOf="@id/linearLayout" />
 
-                />
+                <ImageButton
+                    android:id="@+id/newRoutineBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:contentDescription="newRoutineButton"
+                    android:src="@drawable/addition"
+                    app:layout_constraintBottom_toBottomOf="@id/linearLayout"
+                    app:layout_constraintEnd_toStartOf="@id/progressBtn"
+                    app:layout_constraintStart_toEndOf="@id/routinesBtn"
+                    app:layout_constraintTop_toTopOf="@id/linearLayout"
 
-            <ImageButton
-                android:id="@+id/progressBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@android:color/transparent"
-                android:contentDescription="progressButton"
-                android:src="@drawable/progress"
-                app:layout_constraintBottom_toBottomOf="@id/linearLayout"
-                app:layout_constraintEnd_toEndOf="@id/linearLayout"
-                app:layout_constraintStart_toEndOf="@id/newRoutineBtn"
-                app:layout_constraintTop_toTopOf="@id/linearLayout" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                    />
+
+                <ImageButton
+                    android:id="@+id/progressBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:contentDescription="progressButton"
+                    android:src="@drawable/progress"
+                    app:layout_constraintBottom_toBottomOf="@id/linearLayout"
+                    app:layout_constraintEnd_toEndOf="@id/linearLayout"
+                    app:layout_constraintStart_toEndOf="@id/newRoutineBtn"
+                    app:layout_constraintTop_toTopOf="@id/linearLayout" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.bottomnavigation.BottomNavigationView>
 
     </LinearLayout>
 

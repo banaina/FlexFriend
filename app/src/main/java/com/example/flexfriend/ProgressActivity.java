@@ -27,15 +27,17 @@ import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.common.util.concurrent.ListenableFuture;
 
 import java.io.FileOutputStream;
+import java.io.Serializable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executor;
 
-public class ProgressActivity extends AppCompatActivity implements View.OnClickListener, SensorEventListener {
+public class ProgressActivity extends AppCompatActivity implements View.OnClickListener, SensorEventListener, Serializable {
     /* ProgressActivity Class:
      * A class that allows the user to capture an image, save it to SharedPreferences, and then
      * add the picture to the ImageAdapter
@@ -49,7 +51,7 @@ public class ProgressActivity extends AppCompatActivity implements View.OnClickL
      * https://www.youtube.com/watch?v=Jp6QHc5ip18&t=1028s
      */
     private static final int REQUEST_CAMERA = 1;
-    private Button cameraButton, galleryButton, logBtn;
+    private TextView cameraButton, galleryButton, logBtn;
     private ImageButton routinesBtn, newRoutineBtn, progressBtn;// bottom page buttons;
     private ImageCapture imageCapture;
     private Sensor accelerometer;
@@ -117,6 +119,7 @@ public class ProgressActivity extends AppCompatActivity implements View.OnClickL
                     super.onAuthenticationSucceeded(result);
                     notifyUser("Authentication Succeeded");
                     Intent intent = new Intent(ProgressActivity.this, GalleryActivity.class);
+                    intent.putExtra("adapter", adapter);
                     startActivity(intent);
                 }
                 @Override
@@ -134,7 +137,7 @@ public class ProgressActivity extends AppCompatActivity implements View.OnClickL
     }
 
 
-    
+
     private void notifyUser(String msg){
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
     }
@@ -208,6 +211,7 @@ public class ProgressActivity extends AppCompatActivity implements View.OnClickL
             } else {
                 //start activity by default if biometric lock is not enabled
                 Intent intent = new Intent(ProgressActivity.this, GalleryActivity.class);
+                intent.putExtra("adapter", adapter);
                 startActivity(intent);
             }
         }

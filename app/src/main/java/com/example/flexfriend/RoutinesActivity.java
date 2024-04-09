@@ -23,6 +23,7 @@ import android.widget.Toast;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 // this class shows all the user created routines through a recycler view
 // get data from either the flexibility, cardio, or strength button intent to access the database
@@ -59,7 +60,15 @@ public class RoutinesActivity extends AppCompatActivity implements View.OnClickL
         // key must be same which is send by first activity
         String categoryName = intent.getStringExtra("category");
         // display the string into textView
-        routineCategoryTV.setText(categoryName);
+        if (Objects.equals(categoryName, "flexibility")) {
+            routineCategoryTV.setText("Flexibility");
+        }
+        else if (Objects.equals(categoryName, "cardio")) {
+            routineCategoryTV.setText("Cardio");
+        }
+        else if (Objects.equals(categoryName, "strength")) {
+            routineCategoryTV.setText("Strength");
+        }
 
         db = new FlexFriendDatabase(this);
         helper = new MyHelper(this);

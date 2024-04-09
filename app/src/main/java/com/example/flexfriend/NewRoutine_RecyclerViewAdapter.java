@@ -1,15 +1,19 @@
 package com.example.flexfriend;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Objects;
 
 // this class will add new cardviews to the recycler of NewRoutineActivity
 // the cardview model -> create_routine_model.xml
@@ -34,10 +38,23 @@ public class NewRoutine_RecyclerViewAdapter extends RecyclerView.Adapter<Movemen
     public void onBindViewHolder(@NonNull MovementVH holder, int position) {
 
         // initialize the view with view holder
-        CheckBox timeCheckBox = holder.timeCheckBox;
-        EditText movementET = holder.movementET;
-        EditText setsET = holder.setsET;
-        EditText secRepET = holder.secRepET;
+//        CheckBox timeCdheckBox = holder.timeCheckBox;
+//        EditText movementET = holder.movementET;
+//        EditText setsET = holder.setsET;
+//        EditText secRepET = holder.secRepET;
+
+        holder.timeCheckBox.setText(movementInfo.get(position)[0]);
+        holder.movementET.setText(movementInfo.get(position)[1]);
+        holder.setsET.setText(movementInfo.get(position)[2]);
+        holder.secRepET.setText(movementInfo.get(position)[3]);
+
+//        holder.timeCheckBox.setText(movementInfo.get(position)[position]);
+//        holder.movementET.setText(movementInfo.get(position)[position]);
+//        holder.setsET.setText(movementInfo.get(position)[position]);
+//        holder.secRepET.setText(movementInfo.get(position)[position]);
+
+
+
     }
 
     @Override
