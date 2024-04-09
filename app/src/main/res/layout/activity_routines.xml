@@ -24,6 +24,7 @@
                 android:layout_height="wrap_content"
                android:textAlignment="center"
                 android:text="routine name"
+                android:textStyle="bold"
                 android:textSize="25sp"/>
 
         </LinearLayout>

@@ -14,6 +14,9 @@ public class GalleryItemActivity extends AppCompatActivity {
      * A class that will be used during future changes made to the gallery grid.
      * Will allow user to expand the image from the gallery when clicked on and view it in its own
      * activity.
+     *
+     * References Used:
+     * https://www.youtube.com/watch?v=0YL3pms_0JE
      */
     ImageView img;
     @Override

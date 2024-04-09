@@ -38,6 +38,7 @@
             style="?android:attr/progressBarStyleHorizontal"
             android:layout_width="350dp"
             android:layout_height="350dp"
+            android:layout_alignParentBottom="true"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="100dp"
             android:background="@drawable/circular_shape"

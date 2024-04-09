@@ -59,32 +59,35 @@ public class FullRoutineActivity extends AppCompatActivity implements View.OnCli
         routineNameTV.setText(routineName);
         //get movement names
         Cursor cursor = db.getMovementData(routineName);
-        // looks at the routine names
-        int index1 = cursor.getColumnIndex(Constants.TIMED);
-        int index2 = cursor.getColumnIndex(Constants.MOVEMENT);
-        int index3 = cursor.getColumnIndex(Constants.NUM_OF_REPS);
-        int index4 = cursor.getColumnIndex(Constants.TIME);
-        int index5 = cursor.getColumnIndex(Constants.NUM_OF_SETS);
 
         //add each movement to the arrayList so it can be displayed in the recyclerview using the adapter
         movementsArrayList = new ArrayList<String>();
-        cursor.moveToFirst();
-        while (!cursor.isAfterLast()){
-            String timedIndex = cursor.getString(index1);
-            String movementNameIndex = cursor.getString(index2);
-            String repIndex = cursor.getString(index3);
-            String secIndex = cursor.getString(index4);
-            String setsIndex = cursor.getString(index5);
+        if (cursor!=null && cursor.getCount() > 0) {
+            // looks at the routine names
+            int index1 = cursor.getColumnIndex(Constants.TIMED);
+            int index2 = cursor.getColumnIndex(Constants.MOVEMENT);
+            int index3 = cursor.getColumnIndex(Constants.NUM_OF_REPS);
+            int index4 = cursor.getColumnIndex(Constants.TIME);
+            int index5 = cursor.getColumnIndex(Constants.NUM_OF_SETS);
+            cursor.moveToFirst();
+            while (!cursor.isAfterLast()) {
+                String timedIndex = cursor.getString(index1);
+                String movementNameIndex = cursor.getString(index2);
+                String repIndex = cursor.getString(index3);
+                String secIndex = cursor.getString(index4);
+                String setsIndex = cursor.getString(index5);
 
-            //list each movement and their reps according to whether it is a timed movement or not
-            String movementInfo;
-            if (Objects.equals(timedIndex, "true")) {
-                movementInfo = movementNameIndex + "," + secIndex + " SEC" + "," + setsIndex + " SET";
-            } else{
-                movementInfo = movementNameIndex + "," + repIndex + " REP" + "," + setsIndex + " SET";
+                //list each movement and their reps according to whether it is a timed movement or not
+                String movementInfo;
+                if (Objects.equals(timedIndex, "true")) {
+                    movementInfo = movementNameIndex + "," + secIndex + " SEC" + "," + setsIndex + " SET";
+                } else {
+                    movementInfo = movementNameIndex + "," + repIndex + " REP" + "," + setsIndex + " SET";
+                }
+                movementsArrayList.add(movementInfo);
+                cursor.moveToNext();
             }
-            movementsArrayList.add(movementInfo);
-            cursor.moveToNext();
+            cursor.close();
         }
 
         fullRoutineRecyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -96,7 +99,6 @@ public class FullRoutineActivity extends AppCompatActivity implements View.OnCli
     public void onClick(View v) {
         if (v.getId() == R.id.playRoutineBtn){
             //go to the activity that plays the routine
-            //TODO: change to playroutine activity after debugging
             Intent intent = new Intent(this, MovementScreenActivity.class);
             intent.putExtra("movements arraylist", movementsArrayList);
             startActivity(intent);

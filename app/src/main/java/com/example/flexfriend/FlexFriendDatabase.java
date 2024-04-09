@@ -40,6 +40,8 @@ public class FlexFriendDatabase {
         {
             Toast.makeText(context, "success", Toast.LENGTH_SHORT).show();
         }
+
+        db.close();
        // return id;
     }
 

@@ -7,40 +7,57 @@ import androidx.camera.core.CameraSelector;
 import androidx.camera.core.ImageCapture;
 import androidx.camera.core.Preview;
 import androidx.camera.lifecycle.ProcessCameraProvider;
+import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import android.app.KeyguardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import androidx.biometric.BiometricPrompt;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.common.util.concurrent.ListenableFuture;
 
 import java.io.FileOutputStream;
+import java.io.Serializable;
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Executor;
 
-public class ProgressActivity extends AppCompatActivity implements View.OnClickListener, SensorEventListener {
+public class ProgressActivity extends AppCompatActivity implements View.OnClickListener, SensorEventListener, Serializable {
     /* ProgressActivity Class:
      * A class that allows the user to capture an image, save it to SharedPreferences, and then
      * add the picture to the ImageAdapter
+     *
+     * References used:
+     * https://www.youtube.com/watch?v=0YL3pms_0JE
+     * https://developer.android.com/media/camera/camera-deprecated/camera-api
+     * https://developer.android.com/jetpack/androidx/releases/biometric
+     * https://www.youtube.com/watch?v=RInxqVYnvU8
+     * https://www.youtube.com/watch?v=tXHWyt8g5jc
+     * https://www.youtube.com/watch?v=Jp6QHc5ip18&t=1028s
      */
     private static final int REQUEST_CAMERA = 1;
-    private Button cameraButton, galleryButton;
+    private TextView cameraButton, galleryButton, logBtn;
     private ImageButton routinesBtn, newRoutineBtn, progressBtn;// bottom page buttons;
     private ImageCapture imageCapture;
     private Sensor accelerometer;
     private SensorManager mySensorManager;
     protected ImageAdapter adapter;
+    androidx.biometric.BiometricPrompt biometricPrompt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +68,8 @@ public class ProgressActivity extends AppCompatActivity implements View.OnClickL
         cameraButton.setOnClickListener(this);
         galleryButton = findViewById(R.id.galleryButton);
         galleryButton.setOnClickListener(this);
+        logBtn = findViewById(R.id.logButton);
+        logBtn.setOnClickListener(this);
 
         //bottom of the page buttons
         routinesBtn = (ImageButton) findViewById(R.id.routinesBtn);
@@ -64,6 +83,63 @@ public class ProgressActivity extends AppCompatActivity implements View.OnClickL
         accelerometer = mySensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
 
         adapter = new ImageAdapter(this);
+    }
+
+    //make sure that biometric input is allowed on device and in app
+    private boolean checkBiometrics(){
+        KeyguardManager keyguardManager = (KeyguardManager) getSystemService(Context.KEYGUARD_SERVICE);
+
+        if (!keyguardManager.isKeyguardSecure()) {
+            notifyUser("Fingerprint authentication has not been enabled in settings");
+            return false;
+        }
+
+        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.USE_BIOMETRIC) != PackageManager.PERMISSION_GRANTED) {
+            notifyUser("Fingerprint authentication permission is not enabled");
+            return false;
+        }
+
+        return getPackageManager().hasSystemFeature(PackageManager.FEATURE_FINGERPRINT);
+    }
+
+    private androidx.biometric.BiometricPrompt getPrompt(){
+        Executor executor = ContextCompat.getMainExecutor(this);
+
+        //make sure device version is compatible before requesting biometric input
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.P) {
+            BiometricPrompt.AuthenticationCallback callback = new BiometricPrompt.AuthenticationCallback() {
+                //define what happens depending on which result is received from users fingerprint
+                @Override
+                public void onAuthenticationError(int errorCode, CharSequence errString) {
+                    super.onAuthenticationError(errorCode, errString);
+                    notifyUser(errString.toString());
+                }
+                @Override
+                public void onAuthenticationSucceeded(BiometricPrompt.AuthenticationResult result) {
+                    super.onAuthenticationSucceeded(result);
+                    notifyUser("Authentication Succeeded");
+                    Intent intent = new Intent(ProgressActivity.this, GalleryActivity.class);
+                    intent.putExtra("adapter", adapter);
+                    startActivity(intent);
+                }
+                @Override
+                public void onAuthenticationFailed() {
+                    super.onAuthenticationFailed();
+                    notifyUser("Authentication failed");
+                }
+            };
+
+            //return the fingerprint prompt result
+            biometricPrompt = new androidx.biometric.
+                    BiometricPrompt(this, executor, callback);
+        }
+        return biometricPrompt;
+    }
+
+
+
+    private void notifyUser(String msg){
+        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
     }
     protected void onResume() {
         super.onResume();
@@ -123,8 +199,25 @@ public class ProgressActivity extends AppCompatActivity implements View.OnClickL
             startActivityForResult(camera_intent, REQUEST_CAMERA);
         }
         if (v.getId() == R.id.galleryButton){
-            //send to gallery
-            Intent intent = new Intent(this, GalleryActivity.class);
+            //request a biometric prompt and if its true then send to gallery
+            if (checkBiometrics()) {
+                BiometricPrompt.PromptInfo promptInfo = new BiometricPrompt.PromptInfo.Builder()
+                        .setTitle("Please Verify")
+                        .setDescription("User Authentication is Required to Proceed")
+                        .setNegativeButtonText("Cancel")
+                        .build();
+                //authenticate the result from the prompt/users fingerprint
+                getPrompt().authenticate(promptInfo);
+            } else {
+                //start activity by default if biometric lock is not enabled
+                Intent intent = new Intent(ProgressActivity.this, GalleryActivity.class);
+                intent.putExtra("adapter", adapter);
+                startActivity(intent);
+            }
+        }
+        if (v.getId() == R.id.logButton) {
+            //send to log page
+            Intent intent = new Intent(this, LogProgressActivity.class);
             startActivity(intent);
         }
         if (v.getId() == R.id.routinesBtn) {
