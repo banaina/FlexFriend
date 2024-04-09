@@ -68,7 +68,7 @@
             android:layout_height="50dp"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="460dp"
-            android:src="@android:drawable/arrow_up_float" />
+            android:src="@drawable/twotone_arrow_drop_up_24" />
 
         <TextView
             android:id="@+id/fragSets"
@@ -87,11 +87,11 @@
             android:layout_height="30dp"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="640dp"
-            android:background="#D6D6D6"
+            android:background="@color/bostonBlue"
             android:gravity="center"
             android:text="START TIMER"
             android:textAlignment="center"
-            android:textColor="#171717" />
+            android:textColor="@color/white" />
 
         <ImageButton
             android:id="@+id/downButton"
@@ -99,7 +99,7 @@
             android:layout_height="50dp"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="570dp"
-            android:src="@android:drawable/arrow_down_float" />
+            android:src="@drawable/baseline_arrow_drop_down_24" />
 
         <LinearLayout
             android:id="@+id/fullscreen_content_controls"

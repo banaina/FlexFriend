@@ -1,5 +1,7 @@
 package com.example.flexfriend;
 
+import static androidx.camera.core.impl.utils.ContextUtil.getApplicationContext;
+
 import android.annotation.SuppressLint;
 
 import androidx.annotation.NonNull;
@@ -10,6 +12,8 @@ import androidx.fragment.app.Fragment;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.media.AudioManager;
+import android.media.ToneGenerator;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
@@ -57,6 +61,7 @@ public class PlayRoutineFragment extends Fragment implements View.OnClickListene
     private int repsOrsecs, sets;
     private boolean timerRunning, timed;
     private CountDownTimer ct;
+    ToneGenerator beep = new ToneGenerator(AudioManager.STREAM_MUSIC, 100);
     private final Handler mHideHandler = new Handler(Looper.myLooper());
     private final Runnable mHidePart2Runnable = new Runnable() {
         @SuppressLint("InlinedApi")
@@ -231,9 +236,12 @@ public class PlayRoutineFragment extends Fragment implements View.OnClickListene
                 binding.fragSets.setText(String.valueOf(sets + " SET"));
                 binding.fragProgressRepOrSec.setText(repsOrsecs + " SEC");
                 binding.progressBarFrag.setProgress(100);
+                beep.startTone(ToneGenerator.TONE_CDMA_MED_L, 2000);
+
                 timerRunning = false;
             }
         }.start();
+
     }
 
     @Override
