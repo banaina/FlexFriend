@@ -7,12 +7,13 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.ImageButton;
 import android.widget.ListAdapter;
 import android.widget.Toast;
 
 import com.example.flexfriend.R;
 
-public class GalleryActivity extends ProgressActivity{
+public class GalleryActivity extends ProgressActivity {
     /* GalleryActivity Class:
      * This class displays all the images captured and saved from the camera into a grid view
      *
@@ -22,6 +23,7 @@ public class GalleryActivity extends ProgressActivity{
      */
 
     private GridView imgGrid;
+    private ImageButton backBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,5 +34,15 @@ public class GalleryActivity extends ProgressActivity{
         imgGrid = findViewById(R.id.imgGrid);
         imgGrid.setAdapter(adapter);
 
+        backBtn = (ImageButton) findViewById(R.id.backBtn);
+        backBtn.setOnClickListener(this);
+
+    }
+
+    public void onClick(View v) {
+        if (v.getId() == R.id.backBtn) {
+            Intent intent = new Intent(this, ProgressActivity.class);
+            startActivity(intent);
+        }
     }
 }

@@ -2,6 +2,7 @@ package com.example.flexfriend;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.DashPathEffect;
@@ -11,6 +12,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.github.mikephil.charting.charts.LineChart;
@@ -42,6 +44,7 @@ public class LogProgressActivity extends AppCompatActivity implements View.OnCli
 
     private EditText userWeight, userDate;
     private Button addButton;
+    private ImageButton backBtn;
     private LineChart lineChart;
     private XAxis xAxis;
     private ArrayList<Entry> values;
@@ -54,7 +57,9 @@ public class LogProgressActivity extends AppCompatActivity implements View.OnCli
         userWeight = (EditText) findViewById(R.id.userLogText);
         userDate = (EditText) findViewById(R.id.userDateText);
         addButton = (Button) findViewById(R.id.addWeight);
+        backBtn = (ImageButton) findViewById(R.id.backBtn);
         addButton.setOnClickListener(this);
+        backBtn.setOnClickListener(this);
 
         //initialize graph info/variables
         values = new ArrayList<>();
@@ -186,6 +191,11 @@ public class LogProgressActivity extends AppCompatActivity implements View.OnCli
             } else {
                 Toast.makeText(LogProgressActivity.this, "Fill both fields", Toast.LENGTH_SHORT).show();
             }
+        }
+
+        if (v.getId() == R.id.backBtn){
+            Intent intent = new Intent(this, ProgressActivity.class);
+            startActivity(intent);
         }
     }
 }

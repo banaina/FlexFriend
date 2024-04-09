@@ -27,6 +27,7 @@ import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.common.util.concurrent.ListenableFuture;
@@ -49,7 +50,7 @@ public class ProgressActivity extends AppCompatActivity implements View.OnClickL
      * https://www.youtube.com/watch?v=Jp6QHc5ip18&t=1028s
      */
     private static final int REQUEST_CAMERA = 1;
-    private Button cameraButton, galleryButton, logBtn;
+    private TextView cameraButton, galleryButton, logBtn;
     private ImageButton routinesBtn, newRoutineBtn, progressBtn;// bottom page buttons;
     private ImageCapture imageCapture;
     private Sensor accelerometer;
