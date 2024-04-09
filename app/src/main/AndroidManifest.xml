@@ -4,8 +4,8 @@
     <!-- ensure the device has a camera, front or back -->
     <uses-feature android:name="android.hardware.camera.any" /> <!-- add permission to access that camera -->
     <uses-feature android:name="android.permission.CAMERA" />
-    <uses-permission android:name="android.permission.INTERNET"/> <!--for the graph feature on progresspage -->
 
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -18,6 +18,9 @@
         android:theme="@style/Theme.FlexFriend"
         tools:targetApi="31">
         <activity
+            android:name=".WorkoutCompletedActivity"
+            android:exported="false" />
+        <activity
             android:name=".LogProgressActivity"
             android:exported="false" />
         <activity
@@ -27,38 +30,38 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".FullRoutineActivity"
-            android:exported="false"
             android:configChanges="orientation"
-            android:screenOrientation="portrait"/>
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".GalleryItemActivity"
-            android:exported="false"
             android:configChanges="orientation"
-            android:screenOrientation="portrait"/>
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".GalleryActivity"
-            android:exported="false"
             android:configChanges="orientation"
-            android:screenOrientation="portrait"/>
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".RoutinesActivity"
-            android:exported="false"
             android:configChanges="orientation"
-            android:screenOrientation="portrait"/>
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ProgressActivity"
-            android:exported="false"
             android:configChanges="orientation"
-            android:screenOrientation="portrait"/>
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".NewRoutineActivity"
-            android:exported="false"
             android:configChanges="orientation"
-            android:screenOrientation="portrait"/>
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".MainActivity"
-            android:exported="true"
             android:configChanges="orientation"
+            android:exported="true"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

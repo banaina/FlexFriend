@@ -34,11 +34,11 @@ public class FlexFriendDatabase {
         long id = db.insert(TABLE_NAME, null, contentValues);
         if (id < 0)
         {
-            Toast.makeText(context, "fail", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(context, "fail", Toast.LENGTH_SHORT).show();
         }
         else
         {
-            Toast.makeText(context, "success", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(context, "success", Toast.LENGTH_SHORT).show();
         }
 
         db.close();

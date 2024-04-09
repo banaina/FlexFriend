@@ -232,7 +232,7 @@ public class PlayRoutineFragment extends Fragment implements View.OnClickListene
             }
 
             public void onFinish() {
-                if (sets<0) sets-=1;
+                if (sets>0) sets-=1;
                 binding.fragSets.setText(String.valueOf(sets + " SET"));
                 binding.fragProgressRepOrSec.setText(repsOrsecs + " SEC");
                 binding.progressBarFrag.setProgress(100);

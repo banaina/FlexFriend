@@ -56,8 +56,7 @@ public class MovementScreenActivity extends AppCompatActivity implements View.On
                 if (position < movementsArrayList.size()) {
                     sendInfo(position);
                 } else {
-                    //TODO: set this to the workout completed activity after done debugging
-                    Intent intent = new Intent(this, MainActivity.class);
+                    Intent intent = new Intent(this, WorkoutCompletedActivity.class);
                     startActivity(intent);
                 }
             }

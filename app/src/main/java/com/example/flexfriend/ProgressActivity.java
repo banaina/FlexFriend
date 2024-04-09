@@ -33,10 +33,11 @@ import android.widget.Toast;
 import com.google.common.util.concurrent.ListenableFuture;
 
 import java.io.FileOutputStream;
+import java.io.Serializable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executor;
 
-public class ProgressActivity extends AppCompatActivity implements View.OnClickListener, SensorEventListener {
+public class ProgressActivity extends AppCompatActivity implements View.OnClickListener, SensorEventListener{
     /* ProgressActivity Class:
      * A class that allows the user to capture an image, save it to SharedPreferences, and then
      * add the picture to the ImageAdapter
@@ -263,6 +264,9 @@ public class ProgressActivity extends AppCompatActivity implements View.OnClickL
 
             adapter.addImage(imageUri);
             adapter.notifyDataSetChanged();
+        } else if (data == null) {
+            Intent intent = new Intent(this, ProgressActivity.class);
+            startActivity(intent);
         }
     }
 

@@ -101,7 +101,7 @@ public class NewRoutineActivity extends AppCompatActivity implements View.OnClic
                 for (int i = 0; i < movementCards.size(); i++) { // [[,,,],[,,,]]
                     Log.d("movementCardInfo","movementCardsArray " + i + ": " + Arrays.toString(movementCards.get(i)));
                     for (int j = 0; j < 1; j++) { // less than 1 b/c the time index is in the first position of the array  [,,,]
-                        Toast.makeText(this, movementCards.get(i)[j], Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(this, movementCards.get(i)[j], Toast.LENGTH_SHORT).show();
 
                         // if the time is true, make reps = 0, but if time is false make time = 0
                         if (Objects.equals(movementCards.get(i)[j], "true")) { //time is true
