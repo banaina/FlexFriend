@@ -67,8 +67,7 @@ public class NewRoutineActivity extends AppCompatActivity implements View.OnClic
         // this sets up the recycler view that was created in the NewRoutine_RecyclerViewAdapter.java
         // which allows you to add and remove cardviews of the created movements
         movementCards= new ArrayList<>();
-        movementCards.add(movementData); // add an empty movement card to the recyclerview
-        movementCards.add(movementData);
+//        movementCards.add(movementData); // add an empty movement card to the recyclerview
 
         recyclerView = findViewById(R.id.createRoutineRV);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -131,10 +130,17 @@ public class NewRoutineActivity extends AppCompatActivity implements View.OnClic
 
 
         if (v.getId() == R.id.addMoreBtn) {
-            movementCards.add(movementData); // this just adds an empty movement card to the recycler view
+            String[] move = {"", "", "", ""};
+
+
+            movementCards.add(move); // this just adds an empty movement card to the recycler view
             counter++;
+            Log.d("counter", String.valueOf(counter));
+            Log.d("movementcards", String.valueOf(movementCards));
             Log.d("movementData"," movementCardsArray: " + movementCards);
             adapter.notifyItemInserted(movementCards.size()-1);
+
+
 
         } // end of if (v.getId() == R.id.addMoreBtn)
     } //end of onClick
