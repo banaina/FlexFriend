@@ -3,6 +3,7 @@
     <style name="Base.Theme.FlexFriend" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="colorPrimary">@color/bostonBlue</item>
     </style>
 
     <style name="Theme.FlexFriend" parent="Base.Theme.FlexFriend" />

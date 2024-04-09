@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
@@ -25,7 +26,8 @@ import java.util.Objects;
 public class NewRoutineActivity extends AppCompatActivity implements View.OnClickListener {
     private RecyclerView recyclerView;
     NewRoutine_RecyclerViewAdapter adapter;
-    private Button create, addMoreBtn;
+    private Button create;
+    private ImageButton addMoreBtn;
     private EditText routineNameET;
     private RadioGroup categoriesRG;
     private ArrayList<String[]> movementCards;
@@ -40,7 +42,7 @@ public class NewRoutineActivity extends AppCompatActivity implements View.OnClic
         setContentView(R.layout.activity_create_routine);
         create = (Button) findViewById(R.id.createRoutineBtn);
         create.setOnClickListener(this);
-        addMoreBtn = (Button) findViewById(R.id.addMoreBtn);
+        addMoreBtn = (ImageButton) findViewById(R.id.addMoreBtn);
         addMoreBtn.setOnClickListener(this);
         routineNameET = (EditText)findViewById(R.id.routineNameET);
 
@@ -66,6 +68,7 @@ public class NewRoutineActivity extends AppCompatActivity implements View.OnClic
         // which allows you to add and remove cardviews of the created movements
         movementCards= new ArrayList<>();
         movementCards.add(movementData); // add an empty movement card to the recyclerview
+        movementCards.add(movementData);
 
         recyclerView = findViewById(R.id.createRoutineRV);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
