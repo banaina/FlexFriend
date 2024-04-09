@@ -62,7 +62,7 @@ public class Routines_RecyclerViewAdapter extends RecyclerView.Adapter<Routines_
         // send the position of the routineName as a value
         @Override
         public void onClick(View v) {
-            Toast.makeText(context, "you have clicked " + routineName.getText().toString(), Toast.LENGTH_SHORT).show();
+//            Toast.makeText(context, "you have clicked " + routineName.getText().toString(), Toast.LENGTH_SHORT).show();
             Intent intent = new Intent (v.getContext(), FullRoutineActivity.class);
             Log.d("adapterPos", String.valueOf(getAdapterPosition()));
             intent.putExtra("ROUTINE NAME", routineName.getText().toString());

@@ -37,7 +37,7 @@ import java.io.Serializable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executor;
 
-public class ProgressActivity extends AppCompatActivity implements View.OnClickListener, SensorEventListener, Serializable {
+public class ProgressActivity extends AppCompatActivity implements View.OnClickListener, SensorEventListener{
     /* ProgressActivity Class:
      * A class that allows the user to capture an image, save it to SharedPreferences, and then
      * add the picture to the ImageAdapter
@@ -119,7 +119,6 @@ public class ProgressActivity extends AppCompatActivity implements View.OnClickL
                     super.onAuthenticationSucceeded(result);
                     notifyUser("Authentication Succeeded");
                     Intent intent = new Intent(ProgressActivity.this, GalleryActivity.class);
-                    intent.putExtra("adapter", adapter);
                     startActivity(intent);
                 }
                 @Override
@@ -211,7 +210,6 @@ public class ProgressActivity extends AppCompatActivity implements View.OnClickL
             } else {
                 //start activity by default if biometric lock is not enabled
                 Intent intent = new Intent(ProgressActivity.this, GalleryActivity.class);
-                intent.putExtra("adapter", adapter);
                 startActivity(intent);
             }
         }
@@ -266,6 +264,9 @@ public class ProgressActivity extends AppCompatActivity implements View.OnClickL
 
             adapter.addImage(imageUri);
             adapter.notifyDataSetChanged();
+        } else if (data == null) {
+            Intent intent = new Intent(this, ProgressActivity.class);
+            startActivity(intent);
         }
     }
 

@@ -44,7 +44,7 @@ public class MyHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         try {
             db.execSQL(CREATE_TABLE);
-            Toast.makeText(context, "onCreate() called", Toast.LENGTH_LONG).show();
+//            Toast.makeText(context, "onCreate() called", Toast.LENGTH_LONG).show();
         } catch (SQLException e) {
             Toast.makeText(context, "exception onCreate() db", Toast.LENGTH_LONG).show();
         }
@@ -55,7 +55,7 @@ public class MyHelper extends SQLiteOpenHelper {
         try {
             db.execSQL(DROP_TABLE);
             onCreate(db);
-            Toast.makeText(context, "onUpgrade called", Toast.LENGTH_LONG).show();
+//            Toast.makeText(context, "onUpgrade called", Toast.LENGTH_LONG).show();
         } catch (SQLException e) {
             Toast.makeText(context, "exception onUpgrade() db", Toast.LENGTH_LONG).show();
         }
