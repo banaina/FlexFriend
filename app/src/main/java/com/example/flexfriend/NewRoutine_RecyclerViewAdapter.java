@@ -38,21 +38,11 @@ public class NewRoutine_RecyclerViewAdapter extends RecyclerView.Adapter<Movemen
     public void onBindViewHolder(@NonNull MovementVH holder, int position) {
 
         // initialize the view with view holder
-//        CheckBox timeCdheckBox = holder.timeCheckBox;
-//        EditText movementET = holder.movementET;
-//        EditText setsET = holder.setsET;
-//        EditText secRepET = holder.secRepET;
 
         holder.timeCheckBox.setText(movementInfo.get(position)[0]);
         holder.movementET.setText(movementInfo.get(position)[1]);
         holder.setsET.setText(movementInfo.get(position)[2]);
         holder.secRepET.setText(movementInfo.get(position)[3]);
-
-//        holder.timeCheckBox.setText(movementInfo.get(position)[position]);
-//        holder.movementET.setText(movementInfo.get(position)[position]);
-//        holder.setsET.setText(movementInfo.get(position)[position]);
-//        holder.secRepET.setText(movementInfo.get(position)[position]);
-
 
 
     }

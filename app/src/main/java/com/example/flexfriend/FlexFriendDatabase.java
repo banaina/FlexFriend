@@ -63,7 +63,6 @@ public class FlexFriendDatabase {
     public void deleteRoutine(String routineName) {
 
         SQLiteDatabase db = helper.getWritableDatabase();
-
         // the table we are deleting from, the column we are deleting from, and the routine
         // in the column we are deleting from passed as a parameter
         db.delete(TABLE_NAME, "ROUTINE_NAME = ?", new String[]{routineName});
