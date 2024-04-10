@@ -185,6 +185,7 @@ public class LogProgressActivity extends AppCompatActivity implements View.OnCli
                     SharedPreferences.Editor editor = getSharedPreferences("weight info", MODE_PRIVATE).edit();
                     editor.putInt(String.valueOf(x),y);
                     editor.apply();
+                    Toast.makeText(this, "tap the graph to view changes", Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(LogProgressActivity.this, "invalid format", Toast.LENGTH_SHORT).show();
                 }

@@ -212,6 +212,7 @@ public class PlayRoutineFragment extends Fragment implements View.OnClickListene
         binding.startTimerButton.setOnClickListener(this);
         binding.startTimerButton.setVisibility(View.GONE);
         binding.progressBarFrag.setProgress(100);
+
         binding.fragMovementName.setText(movementString);
         binding.fragProgressRepOrSec.setText(repsOrSecsString);
         binding.fragSets.setText(setsString);
